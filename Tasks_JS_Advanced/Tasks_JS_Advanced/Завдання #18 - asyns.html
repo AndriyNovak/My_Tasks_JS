@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ITEA-JS ADVANCED - LESSON 8</title>
+ 
+  <style>
+ .mydiv{
+ 	display: flex;
+ 	/*border: 1px solid green;*/
+ }
+ .div_slots{
+ 	border: 1px solid blue;
+ 	width: 150px;
+ 	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+ 	padding: 5px;
+ }
+ .div_slots_1{
+ 	border: 1px solid blue;
+ 	width: 30px;
+ 	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+ 	padding: 5px;
+ }
+ .div_slots_5{
+ 	border: 1px solid blue;
+ 	width: 250px;
+ 	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+ 	padding: 5px;
+ }
+ #div_0{
+ 	width: 790px;
+ 	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+ 	
+ 	/*margin-left: -5px;*/
+ 	background-color: lightblue;
+ }
+</style>
+<script type="text/javascript">
+/*
+ /*
+
+  Задание:
+
+    Написать при помощи async-await скрипт, который:
+
+    Получает список компаний:  http://www.json-generator.com/api/json/get/ceRHciXcVu?indent=2
+    Перебирает, выводит табличку:
+
+    # | Company  | Balance | Показать дату регистрации | Показать адресс |
+    1.| CompName | 2000$   | button                    | button
+    2.| CompName | 2000$   | 20/10/2019                | button
+    3.| CompName | 2000$   | button                    | button
+    4.| CompName | 2000$   | button                    | button
+
+    Данные о дате регистрации и адресс скрывать при выводе и показывать при клике.
+
+*/
+window.addEventListener("load", function(){
+	
+
+
+	
+	async function getUserInformaton(){
+	    const getUserResponse = await fetch("http://www.json-generator.com/api/json/get/ceRHciXcVu?indent=2")
+	    const users = await getUserResponse.json();
+	    console.log(users);
+
+	    users.forEach(function(user,i){
+	    	let address = `${user.address.city}, ${user.address.street}, ${user.address.house}`;	    	
+	    	let mydiv = document.createElement("div");
+	    	mydiv.classList.add("mydiv");
+		   
+			let btn_registration = document.createElement("button");
+			btn_registration.innerHTML ="Показать дату регестрации" ;
+			let btn_adress = document.createElement("button");
+			btn_adress.innerHTML ="Показать адресс" ;			
+
+			let div_1 = document.createElement("div");
+			let div_2 = document.createElement("div");
+			let div_3 = document.createElement("div");
+			let div_4 = document.createElement("div");
+			let div_5 = document.createElement("div");
+
+			div_1.classList.add("div_slots_1");
+			div_2.classList.add("div_slots");
+			div_3.classList.add("div_slots");
+			div_4.classList.add("div_slots");
+			div_5.classList.add("div_slots_5");
+
+			div_1.innerHTML = `${i}.`;
+			div_2.innerHTML = `${user.company}`;
+			div_3.innerHTML = `${user.balance}`;
+			div_4.appendChild(btn_registration);
+			div_5.appendChild(btn_adress);
+
+			mydiv.appendChild(div_1);
+			mydiv.appendChild(div_2);
+			mydiv.appendChild(div_3);
+			mydiv.appendChild(div_4);
+			mydiv.appendChild(div_5);
+
+	    	if (btn_registration){
+		     	btn_registration.addEventListener("click",function(e){
+		     		// e.preventDefault();
+			    	btn_registration.style.display = "none";
+			    	div_4.innerHTML = `${user.registered}`;
+		    	})
+		    }		
+		    if (btn_adress){
+			    btn_adress.addEventListener("click",function(e){
+			    	// e.preventDefault();
+			    	btn_adress.style.display = "none";
+			    	div_5.innerHTML = `${address}`;
+			    })
+			}
+			
+	   		document.body.appendChild(mydiv);
+	    })
+	   
+  	}
+
+  	var UserInformaton = getUserInformaton();
+   
+
+})
+
+
+
+   </script>
+  </head>
+  <body>
+  <div id="div_0">
+  <div class ="div_slots_1"><b>#</b> </div>
+   <div class ="div_slots"><b>Company</b></div>
+    <div class ="div_slots"><b>Balance</b></div>
+     <div class ="div_slots"><b>Дата регистрации</b></div>
+      <div class ="div_slots_5"><b>Адрес</b></div>
+   </div>
+  </body>
+</html>

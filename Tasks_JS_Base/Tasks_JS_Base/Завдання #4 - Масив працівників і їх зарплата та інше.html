@@ -1,0 +1,221 @@
+﻿<!-- 
+ 
+1. У вас есть форма с кнопкой и элемент параграф (тег p)…Нажав на кнопку у вас в
+параграфе появляется какая то картинка
+2. У вас есть форма с двумя элементами ввода текста, кнопка и два тега p….Нажав
+на кнопку, у вас в один параграф заноситься текст , который которые ввели из
+одного элемента и в другой параграф заноситься информация из другого
+элемента ввода
+3.Дан HTML код (см. под задачей). Поменяйте содержимое абзацев на их порядковый номер в коде.
+<h2>Заголовок, не поменяется.</h2>
+<p>Абзац, поменяется.</p>
+<p>Абзац, поменяется.</p>
+<p>Абзац, поменяется.</p>
+
+
+
+И из пятого урока четвертое задание по обьектам  
+
+	4. Создать массив, который будет хранить в себе информацию о сотрудниках предприятия. Каждый элемент масива — объект, содержащий свойства: name, sName, age, occupation, и метод show, который выводит всю информацию о пользователе.
+ 	Реализовать заполнение массива пользователем. По окончанию заполнения — вывести информацию о сотрудниках.
+   
+    Для предыдущего задания создайте функцию, которая будет принимать в себя массив объектов-сотрудников, и каждому из объектов
+       будет добавлять новое свойство "salary", хранящее зарплату сотрудника. 
+       Зарплата расчитывается, исходя из значения свойства "occupation" следующим образом:
+           • "director" — 3000;
+           • "manager" — 1500;
+           • "programmer" — 2000;
+           • для остальных значений — 1000.
+       После выполнения функции — вывести информацию о сотрудниках.
+            
+     -->
+     <!DOCTYPE html>
+     <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+      <title>Новак </title>
+
+    </head>
+    <body>
+    	---------Зввдання №1----------<br>
+    	<button id="btn">Кнопка</button>
+    	<p id="paragraph">тег р</p>
+    	---------Зввдання №2----------<br>
+    	<input type="text" name="" id="inp1" placeholder="Поле ввода №1">
+    	<input type="text" name="" id="inp2" placeholder="Поле ввода №2">
+    	<button id="btn2">Кнопка</button>
+    	<p id="par1">Тег 1 </p>
+    	<p id="par2">Тег 2 </p>
+    	---------Зввдання №3----------<br>
+    	<h2>Заголовок, не поменяется.</h2>
+    	<button id="btn3">Натисніть щоб поміняти текст тегов p на їхній номер</button>
+		<p class="tag_p">Абзац, поменяется.</p>
+		<p class="tag_p">Абзац, поменяется.</p>
+		<p class="tag_p">Абзац, поменяется.</p>
+
+    	<script type="text/javascript">
+		// Завдання 1. У вас есть форма с кнопкой и элемент параграф (тег p)…Нажав на кнопку у вас в
+		// параграфе появляется какая то картинка
+
+		// Розв'язок 
+		// document.write("</br>" + "_____Завдання №1:_____" + "</br>");  
+		var btn = document.getElementById("btn");
+		var paragraph = document.getElementById("paragraph");
+		paragraph.style.border = "1px solid blue";
+		paragraph.style.padding = "5px";		
+		paragraph.style.width ="500px";
+		
+		btn.onclick = function(){
+			var img = document.createElement("img");
+			
+			paragraph.appendChild(img);
+			img.setAttribute("src", "https://bipbap.ru/wp-content/uploads/2017/05/VOLKI-krasivye-i-ochen-umnye-zhivotnye.jpg");
+			
+			
+		}
+		</script>
+
+
+
+		<script type="text/javascript">
+		// Завдання 2. У вас есть форма с двумя элементами ввода текста, кнопка и два тега p….Нажав
+		// на кнопку, у вас в один параграф заноситься текст , который которые ввели из
+		// одного элемента и в другой параграф заноситься информация из другого
+		// элемента ввода
+
+		// Розв'язок 
+		// document.write("</br>" + "_____Завдання №2:_____" + "</br>");  
+		var inp1 = document.getElementById("inp1");
+		var inp2 = document.getElementById("inp2");
+		var btn2 = document.getElementById("btn2");
+		var par1 = document.getElementById("par1");
+		var par2 = document.getElementById("par2");
+		par1.style.border = "1px solid green";
+		par2.style.border = "1px solid blue";
+		par1.style.padding = "5px";
+		par2.style.padding = "5px";
+		par1.style.width = "200px";
+		par2.style.width = "200px";
+		btn2.onclick = function(){
+			par1.innerHTML = inp1.value;
+			par2.innerHTML = inp2.value;
+
+		}
+
+
+		</script>
+
+
+		<script type="text/javascript">
+		// Завдання 3.Дан HTML код (см. под задачей). Поменяйте содержимое абзацев на их порядковый номер в коде.
+		// <h2>Заголовок, не поменяется.</h2>
+		// <p>Абзац, поменяется.</p>
+		// <p>Абзац, поменяется.</p>
+		// <p>Абзац, поменяется.</p>
+
+		// Розв'язок 
+		// document.write("</br>" + "_____Завдання №3:_____" + "</br>");  
+		// var tag_p = document.getElementsByTagName("p");
+		var tag_p0 = document.querySelectorAll("p.tag_p")[0];
+		var tag_p1 = document.querySelectorAll("p.tag_p")[1];
+		var tag_p2 = document.querySelectorAll("p.tag_p")[2];
+		var btn3 = document.getElementById("btn3");
+		btn3.onclick = function(){
+			tag_p0.innerHTML = "0";
+			tag_p1.innerHTML = "1";
+			tag_p2.innerHTML = "2";
+		}
+		
+
+		</script>
+
+
+				
+ 		<script type="text/javascript">
+		// Завдання 4. Создать массив, который будет хранить в себе информацию о сотрудниках предприятия. Каждый элемент масива — объект, содержащий свойства: name, sName, age, occupation, и метод show, который выводит всю информацию о пользователе.
+ 		// Реализовать заполнение массива пользователем. По окончанию заполнения — вывести информацию о сотрудниках.
+ 		//Для предыдущего задания создайте функцию, которая будет принимать в себя массив объектов-сотрудников, и каждому из объектов
+   		//     будет добавлять новое свойство "salary", хранящее зарплату сотрудника. 
+		//     Зарплата расчитывается, исходя из значения свойства "occupation" следующим образом:
+		//         • "director" — 3000;
+		//         • "manager" — 1500;
+		//         • "programmer" — 2000;
+		//         • для остальных значений — 1000.
+		//     После выполнения функции — вывести информацию о сотрудниках.
+
+		// Розв'язок 
+		document.write("</br>" + "_____Завдання №4:_____" + "</br>");  
+		
+		var arr=[];
+		var newObject =[];
+
+		do  {	
+		    for(var i=0;i<500;i++){
+		    	newObject =  {
+					name:prompt("Завдання №4: Введіть ім'я", "Max"),
+			        sName :prompt("Завдання №4: Введіть прізвище", "Kovalski"),
+					age:prompt("Завдання №4: Введіть вік",23),
+					occupation:prompt("Завдання №4: Введіть професію (director,manager,programmer,else)","programmer"),
+					show : function () {
+						if (this.name=="" || this.name==null){
+							this.name="немає даних!!!";	
+						}
+						if (this.sName=="" || this.sName==null ){
+							this.sName="немає даних!!!";	
+						}
+						if (this.age=="" || this.age==null ){
+							this.age="немає даних!!!";	
+						}
+						if (this.occupation=="" || this.occupation==null ){
+							this.occupation="немає даних!!!";	
+						} 
+					
+					}
+				}
+				if (newObject.name=="" || newObject.name==null){
+					newObject.name="немає даних!!!";	
+				}
+				if (newObject.sName=="" || newObject.sName==null ){
+					newObject.sName="немає даних!!!";	
+				}
+				if (newObject.age=="" || newObject.age==null ){
+					newObject.age="немає даних!!!";	
+				}
+				if (newObject.occupation=="" || newObject.occupation==null ){
+					newObject.occupation="немає даних!!!";	
+				} 
+				function Funk(){
+					newObject.salary=1000;
+					if ( newObject.occupation=="director"){
+						newObject.salary=3000;
+					}
+					else if ( newObject.occupation=="manager"){
+						newObject.salary=1500;
+					}
+					else if ( newObject.occupation=="programmer"){
+						newObject.salary=2000;
+					}
+			
+				}
+				Funk();
+
+			arr.push("</br> name: " + newObject.name + "</br> sName: " + newObject.sName + "</br> age: " + newObject.age + "</br> occupation: " + newObject.occupation + "</br> salary: " + newObject.salary + "</br>" + "=================");
+			// arr.push("name: " + newObject.name);
+			// arr.push("sName: " + newObject.sName);
+			// arr.push("age: " + newObject.age );
+			// arr.push("occupation: " + newObject.occupation );
+			// arr.push("salary: " + newObject.salary);
+			// arr.push("=================");			
+		var question = confirm("Ви хочете продовжити?");
+	    break;
+		}
+		}
+		while (question)
+  	    document.write(	arr.join("<br>"));
+
+		</script>
+
+
+
+
+    </body>
+    </html>

@@ -1,0 +1,205 @@
+<!-- 
+    1. Создать функцию calculate(operand1, operand2, sign), где operand1 и operand2 — два числа, sign — знак арифметической операции. 
+       Функция должна расчитывать результат операции, исходя из переданного ей знака. 
+       Функция должна проверять корректность введенных чисел и знака операции.
+       Все аргументы для функции принять от пользователя.
+
+    2. Создать функцию, возводящую число в степень, число и сама степень вводится пользователем
+    
+    3.  Создать игру "Камень-Ножницы-Бумага".
+        Выбор компьютера определяется строкой:  
+        "var computerChoice = Math.random();
+        alert(computerChoice);".
+        Math.random() выдает произвольное число в промежутке от 0 до 1, на основании этого можно построить принцип выбора решения компьютера. 
+
+    4. Напишите функцию, которая возвращает n-е число Фибоначчи. Для решения используйте цикл.
+   
+
+
+   ------------- всі завдання виконати через функції------------
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Новак</title>
+    <meta charset="utf-8">
+
+
+
+    <script type="text/javascript">
+    // Завдання 1. Создать функцию calculate(operand1, operand2, sign), где operand1 и operand2 — два числа, sign — знак арифметической операции. (IsNumber використати функцію)
+     // Функция должна расчитывать результат операции, исходя из переданного ей знака. 
+     // Функция должна проверять корректность введенных чисел и знака операции.
+     // Все аргументы для функции принять от пользователя.
+
+    // Розв'язок 
+    document.write("_____Завдання №1:_____" + "</br>");    
+    function calculate(operand1, operand2, sign) {
+      if (arguments.length != 3) {
+        document.write("Помилка. Ви не ввели всіх параметрів !!!" + "</br>" );
+      }else {    
+         
+              switch (sign) {
+                  case "+":
+                      result = operand1 + operand2;
+                      break;
+                  case "-":
+                      result = operand1 - operand2;
+                      break;
+                  case "*":
+                      result = operand1 * operand2;
+                      break;
+                  case "/":
+                      result = operand1 / operand2;
+                      break;
+                  default:
+                     document.write("Ви не ввели знак арифметической операции." + "</br>"); 
+
+                  }  
+            if (sign=="+" || sign=="-" || sign=="*" || sign=="/" )
+                 
+                document.write("Відповідь: " + operand1 + " " + sign + " " + operand2 + " = " + result +  "</br>" ); 
+             } 
+      }          
+    
+
+    var operand1 = +prompt("Введіть 1-й операнд:",10);
+    var operand2 = +prompt("Введіть 2-й операнд:",2);
+    var sign = prompt("Введіть знак арифметичної дії:");
+    var result;   
+    
+    if (isNaN(operand1) || isNaN(operand2) ){
+                document.write("Помилка. 1-й операнд або 2-й операнд - не являються числом." +  "</br>" ); 
+    } 
+    else 
+   calculate(operand1, operand2, sign);
+   
+    </script>
+    
+
+     <script type="text/javascript">
+    // Завдання 2. Создать функцию, возводящую число в степень, число и сама степень вводится пользователем 
+
+    // Розв'язок 
+    document.write( "</br>" + "_____Завдання №2:_____" + "</br>");    
+    function calculate(x1, pow) {     
+        result = 1;
+        if (pow>=0)
+        for (var i=0;i<pow;i++){
+          result*=x1;
+        }
+        else if (pow<0){          
+          for (pow;pow<0;pow++){          
+          result*=1/x1;
+          }  
+        }      
+        return result;
+      }      
+      
+     
+    var x1 = +prompt("Введіть число:",2);
+    var pow = +prompt("Введіть степінь:",3); 
+    var result;
+    if (isNaN(x1) || isNaN(pow) ) {
+      document.write("Помилка. Ви ввели не число " + "</br>" );
+    } 
+    else {
+      calculate(x1, pow);
+    document.write("Число = " + result +  "</br>" );
+    } 
+    
+    </script>
+
+
+
+     <script type="text/javascript">
+    // Завдання 3.  Создать игру "Камень-Ножницы-Бумага".
+    //     Выбор компьютера определяется строкой:  
+    //     "var computerChoice = Math.random();
+    //     alert(computerChoice);".
+    //     Math.random() выдает произвольное число в промежутке от 0 до 1, на основании этого можно построить принцип выбора решения компьютера. (до  33 - камень, якщо в ПК камень, і в Юзера камень то нінья)
+
+    // Розв'язок 
+    document.write( "</br>" + "_____Завдання №3:_____" + "</br>");    
+    function randomGame(choiseUser) {     
+       computerChoice =Math.round(1 + Math.random()*(3-1));
+          switch(computerChoice){
+            case 1:computerChoice = "Камінь";break;
+            case 2:computerChoice = "Ножиці";break;
+            case 3:computerChoice = "Папір"; 
+                      
+          }
+          alert("Вибір Комп'ютера - " + computerChoice);
+        document.write("Вибір Комп'ютера - " + computerChoice + "</br>");
+        if (computerChoice==choiseUser){
+          document.write("Нічия. Перемогла дружба!!!" + "</br>");
+        }
+        else if (computerChoice=="Камінь" && choiseUser=="Ножиці") {
+           document.write("Виграв Комп'ютер, бо Камінь ламає Ножиці." + "</br>");
+        }
+        else if (computerChoice=="Ножиці" && choiseUser=="Папір") {
+           document.write("Виграв Комп'ютер, бо Ножиці ріжуть Папір." + "</br>");
+        }
+        else if (computerChoice=="Папір" && choiseUser=="Камінь") {
+           document.write("Виграв Комп'ютер, бо Папір накриває Камінь." + "</br>");
+        }
+        else document.write("Виграв Користувач!!!" + "</br>");
+        
+       
+      }      
+      
+     
+    var choiseUser = prompt("Введіть одне з трьох значень \"Камінь\" , \"Ножиці\", \"Папір\" :", "Камінь");     
+    var result;  
+    var computerChoice;
+    document.write("Вибір Користувача -  " + choiseUser + "</br>");
+    if (isNaN(choiseUser)) {
+    randomGame(choiseUser);
+    
+    
+    }
+    else document.write("Помилка. ви не ввели одне з трьох значень" + "</br>");
+    </script>
+
+
+
+     <script type="text/javascript">
+    // Завдання 4. Напишите функцию, которая возвращает n-е число Фибоначчи. Для решения используйте цикл.
+
+    // Розв'язок 
+    document.write( "</br>" + "_____Завдання №4:_____" + "</br>");    
+    function Fibonachi(n) {  
+     var a=0;
+     var b=1;          
+     if (n<=0) {
+      document.write("Введіть порядковий номер n-го числа Фибоначчи  => 1 " + "</br>");
+     }
+     else if (n==1) {
+      document.write("Число Фибоначчи = " + a + "</br>");
+     } 
+      else if (n==2) {
+      document.write("Число Фибоначчи = " + b + "</br>");
+     } 
+     else {
+        for(var i=2;i<n;i++){
+          c=a+b;
+          a=b;
+          b=c;
+        }  
+        document.write("Число Фибоначчи = " + b + "</br>");
+      }
+     
+    }    
+    
+    var x1 = +prompt("Введіть порядковий номер n-го числа Фибоначчи");
+    if (isNaN(x1)) {
+    document.write("Помилка. Порядковий номер не являється числом" + "</br>");
+    }    
+    else Fibonachi(x1); 
+    </script>
+
+
+</head>
+<body>
+</body>
+</html>

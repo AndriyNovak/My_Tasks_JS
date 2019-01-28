@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Новак</title>
+	<style type="text/css">
+        table {
+            color:blue;
+            border:1px solid blue;
+           border-collapse: collapse;
+
+        }
+    </style>
+</head>
+<body>
+	
+
+	<script type="text/javascript">
+	// Завдання 1. Среди трех чисел найти среднее арифметическое. Если среди чисел есть равные, вывести сообщение "Ошибка". Числа принять от пользователя. 
+
+	// Розв'язок 	
+	document.write("_____Завдання №1:_____" + "</br>");
+	var a = +prompt("Завдання 1: Введіть перше число ");
+	var b = +prompt("Завдання 1: Введіть друге число");
+	var c = +prompt("Завдання 1: Введіть третє число");
+	var result = (a+b+c)/3;
+	if (a==b || b==c || c==a) {
+		document.write("Ошибка");
+	}
+	else document.write("a = " + a + "</br>" + "b = " + b + "</br>" + "c = " + c + "</br>" + "Середнє арифметичне число = " + result);
+	</script>
+
+
+	<script type="text/javascript">
+	// Завдання 2. Построить прямоугольный треугольник состоящий из символа "*".
+
+	// Розв'язок 	
+	document.write("</br>" + "_____Завдання №2:_____" + "</br>");
+	// for (var i=1; i<=10;i++) {		
+	// 	for (var j = 1; j <= 11-i; j++) {			 
+	// 		document.write("*" );	          
+	// 	}		
+	// 	document.write("</br>");
+	// }
+
+	for (var i=10; 1<=i;i--) {		
+		for (var j = 1; j <= 11-i; j++) {			 
+			document.write("*" );	          
+		}		
+		document.write("</br>");
+	}
+	</script>
+
+
+
+	<script type="text/javascript">
+	// Завдання 3. Определить какое из трех, введенных пользователем, чисел максимальное и вывести его на экран.
+
+	// Розв'язок 
+	document.write("_____Завдання №3:_____" + "</br>");
+	var a = +prompt("Завдання 3: Введіть перше число ");
+	var b = +prompt("Завдання 3: Введіть друге число");
+	var c = +prompt("Завдання 3: Введіть третє число");
+	var result = Math.max(a,b,c);
+	if (result) {
+		document.write("Максимальне число = " + result);
+	}
+	else document.write("Ошибка");
+	</script>
+
+
+
+	<script type="text/javascript">
+	// Завдання 4. Дано два числа A и B где (A<B). 
+ 	//Выведите на экран суму всех чисел расположенных в числовом промежутке от А до В. 
+ 	//Выведите на экран все нечетные значения, расположенные в числовом промежутке от А до В.
+
+	// Розв'язок 
+	document.write("</br>" + "_____Завдання №4:_____" + "</br>");
+	var a = +prompt("Завдання 4: Введіть перше число A при (A<B) ");
+	var b = +prompt("Завдання 4: Введіть друге число B при (A<B)");
+	var sum=0;
+	
+		
+	
+	if (a<b) {
+
+		document.write("Непарні значення в числовому проміжку [" + a + " , " + b + "] при А<В: ");
+		for (a;a<b+1;a++){			
+			if (a%2!=0) {
+				document.write(a + "; ")
+			}
+			sum +=a;			
+		}
+		document.write("Сума всіх чисел на проміжку = " + sum);	
+	}
+	else document.write("Помилка або введіть А < B");
+	</script>
+
+
+
+	<script type="text/javascript">
+	// Завдання 5. Вывести на экран ряд чисел Фибоначчи, состоящий из n элементов (n принять от пользователя).
+ 	//Числа Фибоначчи – это элементы числовой последовательности, в которой каждое последующее число равно сумме двух предыдущих.
+
+	// Розв'язок 
+	document.write("</br>" + "_____Завдання №5:_____" + "</br>");	
+    var n = +prompt("Завдання 5: Введіть n - кількість чисел Фибоначчи: "); 
+    var a=0;  
+    var b=1; 
+    var c;  	
+    document.write("Ряд чисел Фибоначчи: " + a + "; " + b + "; "); 
+    for (var i=2;i<n;i++){
+    	c = a + b;
+    	a = b;
+    	b = c;
+    	document.write(c + "; ");
+    }	
+		
+    </script>
+
+
+
+	<script type="text/javascript">
+	// Завдання 6. Вывести на экран таблицу умножения от 0 до 9.
+
+	// Розв'язок 
+	document.write("</br>" + "_____Завдання №6:_____" + "</br>");	
+         document.write("<table border='1px'>");
+        for (var i = 0; i <= 9; i++) {
+             document.write("<tr>");
+            for  (var j = 0; j <= 9; j++) {
+              
+                document.write("<td>" + i + "x" + j + " = "  + i*j +  "<td/>");
+             
+            }
+             
+             document.write("<tr/>");
+        }
+      document.write("</table>");
+    </script>
+	
+	
+</body>
+</html>

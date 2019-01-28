@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Forms Task 1</title>
+  <script>
+    /*
+      Задание:
+        Сделать валидацию формы:
+        1. Логин / Пароль не может быть пустым
+        2. Пароли должны совпадть
+        3. Пока не стоит что юзер согласен с лиц. соглашением - кнопка отправки не активна
+
+        + бонус - то поле, которое не прошло валидацию подсвечивать красным.
+                - которое прошло - подсвечивать зеленым.
+    */
+    
+   document.addEventListener('DOMContentLoaded', function(){              
+		
+		const MyValidateForm = document.getElementById("MyValidateForm");
+		var submit = document.getElementById("submit"); 		
+		var agree = document.getElementById("agree");	
+		var logg = document.forms.MyValidateForm.elements.login;
+		var pas11 = document.forms.MyValidateForm.elements.pas1;
+		var pas22 = document.forms.MyValidateForm.elements.pas2;
+		
+		submit.disabled = true;
+		agree.addEventListener("click", function(){	  				
+	  		 console.log(agree.checked);
+	  		 if  (agree.checked===true ){	  		 
+	  		 	submit.removeAttribute("disabled");	  		 	
+	  		 }
+	  		 else {
+	  		 	submit.disabled = true;	  		 	
+	  		 }	  		
+	  	})	
+				var i=0;
+				MyValidateForm.addEventListener('change', function(){	
+
+					if( logg.value ===  '' ){  
+	 					logg.classList.remove("OK");	 					
+	 					logg.classList.add("error");	 						
+			 			alert("Поля не должны  быть пустыми!!! Заполните все поля");    		 		
+				 	}
+				 	else {
+					 	logg.classList.remove("error");	 					
+					 	logg.classList.add("OK");
+					 	
+
+				 	}  
+	
+
+				 if (pas11.value!== "" && pas22.value!=="" ) {
+				 		if (pas11.value!== pas22.value ) {
+		        		     
+			        		pas11.classList.remove("OK");
+				 			pas22.classList.remove("OK");
+			        		pas11.classList.add("error");
+				 			pas22.classList.add("error");
+				 			alert("Пароли должны совпадать!!!");
+				 			pas11.value=""; 
+				 			pas22.value="";    	   	            	         
+					       
+						} else  if (pas11.value=== pas22.value ) {
+							pas11.classList.remove("error");
+				 			pas22.classList.remove("error");
+					 		pas11.classList.add("OK");
+					 		pas22.classList.add("OK");
+					 	} else if (pas11.value=== "" || pas22.value==="" ) {
+			 				alert("Поля не должны  быть пустыми!!! Заполните все поля"); 
+			 			
+		 					pas11.classList.add("error");
+		 					pas22.classList.add("error");
+				 	}	
+				 				
+				 	}
+
+
+			})
+		})
+			
+	
+  </script>
+</head>
+<body>
+  <form  id="MyValidateForm">
+    <input type="text" name='login' placeholder="Ваш логин" />
+    <input type="password" name='pas1' placeholder="Ваш пароль" />
+    <input type="password" name='pas2' placeholder="Повторите пароль" />
+    <label for="agree">
+      <span>Вы согласны с лицензионым соглашением.</span>
+      <input type="checkbox" id="agree" />
+    </label>
+    <input type="submit" id="submit" value="Отправить"/>
+  </form>
+
+
+  	
+  <style>
+    #MyValidateForm{
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #MyValidateForm input{
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+    .error{
+        border: 2px solid red;
+    }
+    .OK{
+        border: 2px solid green;
+    }
+  </style>
+</body>
+</html>

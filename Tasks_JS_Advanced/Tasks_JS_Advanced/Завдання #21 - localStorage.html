@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ITEA-JS ADVANCED - LESSON 9</title>
+ 
+  <style>
+   #myWrap{
+   	margin: 20px;
+   	display: flex;
+   	
+   	
+   }
+   #div{
+   		display: flex;
+   }
+   input{
+   	margin-right: 10px;
+   }
+  
+</style>
+<script type="text/javascript">
+
+/*
+  Задание 1:
+    Написать скрипт, который по клику на кнопку рандомит цвет и записывает его в localStorage
+    После перезагрузки страницы, цвет должен сохранится.
+*/
+
+window.addEventListener("load", function(){
+	function getRandom(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+   
+	let bg_color;
+	let btn = document.getElementById("btn");
+	btn.addEventListener("click", function(e){
+			// e.preventDefault();
+		let  dd= "#" +  getRandom(0,255).toString(16) + getRandom(0,255).toString(16) + getRandom(0,255).toString(16) ;
+		localStorage.setItem("Background_color", dd);
+			
+ document.body.style.background =localStorage.getItem("Background_color") ;
+			
+
+	})
+	document.body.style.background =localStorage.getItem("Background_color") ;
+
+
+/*
+
+  Задание 2:
+    Написать форму логина (логин пароль), которая после отправки данных записывает их в localStorage.
+    Если в localStorage есть записть - На страниче вывести "Привет {username}", если нет - вывести окно
+    логина.
+
+
+    + бонус, сделать кнопку "выйти" которая удаляет запись из localStorage и снова показывает форму логина
+    + бонус сделать проверку логина и пароля на конкретную запись. Т.е. залогинит пользователя если
+    он введет только admin@example.com и пароль 12345678
+*/
+let login = document.getElementById("login");
+let password = document.getElementById("password");
+let submit = document.getElementById("submit");
+let myWrap = document.getElementById("myWrap");
+let div = document.getElementById("div");
+let Exit = document.createElement("button");
+let FormId = document.getElementById("FormId");
+let addLogin = document.createElement("input");
+Exit.innerHTML = "Exit";
+login.value="admin@example.com";
+password.value="12345678";
+Exit.addEventListener("click",function(e){
+ 			// e.preventDefault();
+ 			div.innerHTML = "";
+ 			localStorage.clear();
+ 			
+ 			login.style.display = "block";
+	 		password.style.display = "block";
+	 		submit.style.display = "block";
+	 		Exit.style.display = "none";
+	 		login.value="admin@example.com";
+			password.value="12345678";
+ 			FormId.style.display = "flex";
+ 			addLogin.style.display = "none";
+ 			login.value =addLogin.value;
+})
+	 	
+submit.addEventListener("click",function(e){
+ 	e.preventDefault();
+
+if (login.value==="admin@example.com" && password.value==="12345678"){
+ 		Exit.style.display = "block";
+ 	let log_value = login.value;
+ 	let pass_value = password.value;
+ 	console.log("login: " + log_value);
+ 	console.log("password: " + pass_value);
+ 	
+
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	// Если в localStorage есть записть - На страниче вывести "Привет {username}", если нет - вывести окно
+    // логина.
+ 	localStorage.setItem("login", log_value);
+ 	localStorage.setItem("password", pass_value);
+ 	//Одну из строк надо закоментить чтоб увидеть коректность роботы 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
+
+
+
+
+
+ 	let log = localStorage.getItem("login");
+ 	let pass = localStorage.getItem("password");
+
+ 	if (log && pass){
+ 		addLogin.style.display = "none";
+ 		div.innerHTML = `Привет ${log}`;
+ 		myWrap.appendChild(Exit);
+ 		login.style.display = "none";
+ 		password.style.display = "none";
+ 		submit.style.display = "none";
+
+ 	}
+ 	else {
+ 		addLogin.style.display = "block";
+ 		login.style.display = "none";
+ 		password.style.display = "none";
+ 		submit.style.display = "none";
+ 		
+ 		addLogin.setAttribute("placeholder","Введите login");
+ 		myWrap.appendChild(addLogin);
+ 		myWrap.appendChild(Exit);
+ 		Exit.style.display = "block";
+ 		
+ 	}
+}
+else if (login.value!=="admin@example.com"){
+	alert("Вы ввели не правильный логин ");
+
+}
+else if (password.value!=="12345678"){
+	alert("Вы ввели не правильный пароль ");
+
+}
+
+
+
+ 	
+})
+
+
+})
+
+
+
+   </script>
+  </head>
+  <body>
+  	<button id="btn">Кнопка color</button>
+  	<div id="myWrap">
+  		<div id="div"></div>
+  		<form id="FormId">
+  			<input type="text" id="login" name="login" placeholder="login">
+  			<input type="password" id="password" name="password" placeholder="password">
+  			<button type="submit" id="submit">Submit</button>
+  		</form>
+  	</div>
+  </body>
+</html>

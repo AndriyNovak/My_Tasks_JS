@@ -1,0 +1,209 @@
+﻿<!-- 
+    1. Создать объект Point, содержащий два свойства: "x" и "y" — координаты точки, и метод GetQuadrant, вычисляющий,
+       в каком квадранте в декартовой системе координат находится данная точка. (2ша 2га 3тя 4та четверть , система координат ,GetQuadrant він має робити це в обєкті )
+       Протестируйте данный объект, изменяя значения его координат, и повторно вызавая метод GetQuadrant.
+    
+    2. Создать объект Calculator, который должен содержать методы для расчета суммы, разности, произведения и частного двух чисел.
+       Протестировать данный объект, принимая от пользователя значения двух операндов и знак операции.
+       В зависимости от принятого знака операции, вызвать соответствующий метод.
+
+    3. Создать массив, который будет хранить в себе информацию о сотрудниках предприятия. Каждый элемент масива — объект,
+       содержащий свойства: name, sName, age, occupation, и метод show, который выводит всю информацию о пользователе.
+       Реализовать заполнение массива пользователем. По окончанию заполнения — вывести информацию о сотрудниках.
+     (простой масив , через промпт або инпуе, спрашуемо чи їхоче продолжить ли запалнять масив пользователь, в кінці пушим в пустий масив , конфірм)
+    
+
+
+
+                     
+
+     -->
+     <!DOCTYPE html>
+     <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+      <title>Новак </title>
+
+    </head>
+    <body>
+
+
+
+		<script type="text/javascript">
+		// Завдання 1. Создать объект Point, содержащий два свойства: "x" и "y" — координаты точки, и метод GetQuadrant, вычисляющий,в каком квадранте в декартовой системе координат находится данная точка.
+ 		 //Протестируйте данный объект, изменяя значения его координат, и повторно вызавая метод GetQuadrant.
+
+		// Розв'язок 
+		document.write("_____Завдання №1:_____" + "</br>");  
+		var  Point = {
+			x:0,
+			y :0,
+			GetQuadrant: function (){
+				if (Point.x>0 && Point.y>0) {
+					alert("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться в I-му квадранті");
+					document.write("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться в I-му квадранті" + "</br>");
+				}
+				else if (Point.x<0 && Point.y>0) {
+					alert("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться в II-му квадранті");
+					document.write("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться в II-му квадранті" + "</br>");
+				}
+				else if (Point.x<0 && Point.y<0) {
+					alert("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться в III-му квадранті");
+					document.write("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться в III-му квадранті" + "</br>");
+				}
+				else if (Point.x>0 && Point.y<0) {
+					alert("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться в IV-му квадранті");
+					document.write("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться в IV-му квадранті" + "</br>");
+				}
+				else if (Point.x==0 && Point.y<0 || Point.y>0) {
+					alert("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться на осі ординат");
+					document.write("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться на осі ординат" + "</br>");
+				}
+				else if (Point.y==0 && Point.x<0 || Point.x>0) {
+					alert("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться на осі абсцис");
+					document.write("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться на осі абсцис" + "</br>");
+				}
+				else  if (Point.x==0 && Point.y==0) {
+					alert("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться в початку координат");
+					document.write("Точка з координатами [" + Point.x + ", " + Point.y + "] знаходиться в початку координат" + "</br>");
+				}
+				else  if (Point.x=="" || Point.y=="") {
+					alert("Ви нічого не ввели");
+					document.write("Ви нічого не ввели" + "</br>");
+				}
+
+			}	
+		}
+		
+		// Point.GetQuadrant();
+		var a = true;		
+		while (a){
+			
+			
+			Point.x = prompt("Ввведіть координату х",7);
+			Point.y = prompt("Ввведіть координату y",8);
+			if (isNaN(Point.x) || isNaN(Point.y)) {
+				alert("Координати X і Y мають бути  числом" );
+			}
+			else if (Point.x!==null || Point.y!==null){
+				Point.GetQuadrant();
+			}
+			else break;		
+				
+		}
+
+		</script>
+
+
+
+		<script type="text/javascript">
+		// Завдання 2. Создать объект Calculator, который должен содержать методы для расчета суммы, разности, произведения и частного двух чисел.
+  		// Протестировать данный объект, принимая от пользователя значения двух операндов и знак операции.
+ 		// В зависимости от принятого знака операции, вызвать соответствующий метод.
+
+		// Розв'язок 
+		document.write("</br>" + "_____Завдання №2:_____" + "</br>");  
+		var  Calculator = {
+			x: prompt("Завдання №2: Ввведіть 1-й операнд",5),
+			y: prompt("Завдання №2: Ввведіть 2-й операнд",5),
+			sign: prompt("Ввведіть знак операції","+"),
+			sum: function (){				
+				return Number(this.x)+Number(this.y);				
+			},
+			minus: function (){
+				return Number(this.x)-Number(this.y);						
+			},
+			mult: function (){
+				return Number(this.x)*Number(this.y);			
+			},
+			div: function (){
+				return Number(this.x)/Number(this.y);				
+			}
+		}
+		
+		
+		if (Calculator.sign===null || isNaN(Calculator.x) || isNaN(Calculator.y) || Calculator.x===null || Calculator.y===null || Calculator.sign==="" || Calculator.x==="" || Calculator.y==="") {
+			document.write("Помилка. Можливо ви нічого не ввели." + "</br>");
+		}
+		else {
+			switch(Calculator.sign) {
+			case "+": document.write("Відповідь: " + Calculator.x + Calculator.sign + Calculator.y + " = " +  Calculator.sum() + "</br>");break;
+			case "-":document.write("Відповідь: " + Calculator.x + Calculator.sign + Calculator.y + " = " +  Calculator.minus() + "</br>");break;
+			case "*": document.write("Відповідь: " + Calculator.x + Calculator.sign + Calculator.y + " = " +  Calculator.mult() + "</br>");break;
+			case "/":document.write("Відповідь: " + Calculator.x + Calculator.sign + Calculator.y + " = " +  Calculator.div() + "</br>");break;			
+			case "":document.write("Ви не ввели знак операції" + "</br>");
+			default:document.write( "Ви не ввели знак операції" + "</br>");
+		}
+		}
+		</script>
+
+
+ 
+
+ 		<script type="text/javascript">
+		// Завдання 3. Создать массив, который будет хранить в себе информацию о сотрудниках предприятия. Каждый элемент масива — объект, содержащий свойства: name, sName, age, occupation, и метод show, который выводит всю информацию о пользователе.
+ 		 // Реализовать заполнение массива пользователем. По окончанию заполнения — вывести информацию о сотрудниках.
+ 		
+
+		// Розв'язок 
+		document.write("</br>" + "_____Завдання №3:_____" + "</br>");  
+		// запустити в цикл 
+		var arr=[];
+		var newObject =[];
+		
+		
+		do  {	
+		    for(var i=0;i<Infinity;i++){
+		    	newObject =  {
+					name:prompt("Завдання №3: Введіть ім'я", "Максим"),
+			        sName :prompt("Завдання №3: Введіть прізвище", "Гурченко"),
+					age:prompt("Завдання №3: Введіть вік",23),
+					occupation:prompt("Завдання №3: Введіть професію","програміст"),
+					show : function () {
+						if (this.name=="" || this.name==null){
+							this.name="немає даних!!!";	
+						}
+						if (this.sName=="" || this.sName==null ){
+							this.sName="немає даних!!!";	
+						}
+						if (this.age=="" || this.age==null ){
+							this.age="немає даних!!!";	
+						}
+						if (this.occupation=="" || this.occupation==null ){
+							this.occupation="немає даних!!!";	
+						} 
+					
+					}
+				}
+			if (newObject.name=="" || newObject.name==null){
+							newObject.name="немає даних!!!";	
+						}
+						if (newObject.sName=="" || newObject.sName==null ){
+							newObject.sName="немає даних!!!";	
+						}
+						if (newObject.age=="" || newObject.age==null ){
+							newObject.age="немає даних!!!";	
+						}
+						if (newObject.occupation=="" || newObject.occupation==null ){
+							newObject.occupation="немає даних!!!";	
+						} 
+			arr.push("</br> name: " + newObject.name + "</br> sName: " + newObject.sName + "</br> age: " + newObject.age + "</br> occupation: " + newObject.occupation + "</br>" + "=================");
+			// arr.push("name: " + newObject.name);
+			// arr.push("sName: " + newObject.sName);
+			// arr.push("age: " + newObject.age );
+			// arr.push("occupation: " + newObject.occupation );
+			
+			// arr.push("=================");		  	
+	    
+		var question = confirm("Ви хочете продовжити?");
+	    break;
+		}
+		}
+		while (question)
+  	    document.write(	arr.join("</br>"));
+    	
+		</script>
+
+
+
+    </body>
+    </html>

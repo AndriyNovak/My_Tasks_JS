@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Classwork</title>
+    <style type="text/css">
+    #wrap{
+    	display: flex;
+    	border:1px solid green;
+    	width: 600px;
+    	height: 50px;
+    	align-items: center;
+    	justify-content: center;
+    	margin: 30px;
+    }
+    #Select_Result{
+    		margin: 20px;
+    	}
+	#duration_Result{
+		margin: 20px;
+	}
+    </style>
+    <script>
+
+    /*
+      Задание:
+      1. При помощи методов изложеных ниже, переформатировать ITEA_COURSES в массив который содержит длину строк каждого из элементов.
+      2. Самостоятельно изучить метод Array.sort. Отфильтровать массив ITEA_COURSES по алфавиту.
+          + Бонусный бал. Вывести на страничку списком
+      3. Реализация функции поиска по массиву ITEA_COURSES.
+          + Бонусный бал. Вывести на страничку инпут и кнопку по которой будет срабатывать поиск.
+    */
+ window.addEventListener('load', function(){
+        
+  
+    const ITEA_COURSES = ["Курс HTML & CSS", "JavaScript базовый курс", "JavaScript продвинутый курс", "JavaScript Professional", "Angular 2.4 (базовый)", "Angular 2.4 (продвинутый)", "React.js", "React Native", "Node.js", "Vue.js"];
+   	console.log(ITEA_COURSES);
+
+   	ITEA_COURSES.filter((elem2,i2,arr2) =>arr2.sort());
+    // ITEA_COURSES.sort();
+    console.log(ITEA_COURSES);
+    // console.log(filter1);
+
+
+	let result = document.getElementById("result");
+
+    ITEA_COURSES.forEach(function(elem1,i1){
+    	let li = document.createElement("li");
+   		let ul = document.createElement("ul");
+    	ul.appendChild(li);    	
+    	li.innerHTML = elem1;
+		result.appendChild(ul);
+
+    })
+    let ArrITEA =  ["Курс HTML & CSS", "JavaScript базовый курс", "JavaScript продвинутый курс", "JavaScript Professional", "Angular 2.4 (базовый)", "Angular 2.4 (продвинутый)", "React.js", "React Native", "Node.js", "Vue.js"];
+    // console.log(ArrITEA);
+    ITEA_COURSES.map((elem3,i3,arr3)=>arr3[i3]=elem3.length)
+    // ITEA_COURSES.forEach(function(elem,i){
+    // 	// elem = elem.length;
+    // 	ITEA_COURSES[i] = elem.length;
+    // })
+    console.log(ITEA_COURSES);
+  
+    let input = document.createElement("input");
+    let btn = document.createElement("button");
+    btn.innerHTML = "Знайти";
+    let find = document.getElementById("find");
+    find.appendChild(input);
+    find.appendChild(btn);
+    let findResult = document.getElementById("findResult");
+    btn.addEventListener("click", function(){
+    	ArrITEA.find(function(elem4){
+    		
+    		// console.log(ArrITEA.indexOf( input.value));
+    		if (ArrITEA.indexOf( input.value) != -1 ){
+    			findResult.innerHTML = `Елемент ${input.value} есть в масиве ITEA_COURSES`;
+    		}
+    		else {
+    			
+    			findResult.innerHTML = `Такого елемента ${input.value} нету в масиве ITEA_COURSES`;
+    		}
+    	})
+    	
+    })
+
+ //------------------------------------------------------------------------------------------------   
+    /*
+      Задание 2:
+      Написать фильтр массива по:
+      Актеру, продолжительности
+
+      Бонус:
+        Сделать графическую оболочку для программы:
+        - Селект со списком актеров
+        - Селект или инпут с продолжительностью
+        - Результат в виде списка фильмов
+    */
+
+      var stars = ['Elijah Wood', 'Ian McKellen', 'Orlando Bloom','Ewan McGregor',' Liam Neeson', 'Natalie Portman', 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
+      let durations_Arr = ["100","136","150","240"];
+
+      let Select_Result =document.getElementById("Select_Result");
+      let duration_Result = document.getElementById("duration_Result");
+	  
+	  let select_Actor = document.createElement("select");
+      let select_Duration = document.createElement("select");
+      
+
+
+    stars.forEach(function(elem){	     
+	     let option_Actor = document.createElement("option");     
+	     option_Actor.innerHTML = elem;
+	     select_Actor.appendChild(option_Actor);
+		Select_Result.appendChild(select_Actor);
+		
+    })
+	
+      
+
+    durations_Arr.forEach(function(elem1){	     
+	    let option_Duration = document.createElement("option"); 
+	    option_Duration.innerHTML = elem1;
+	    select_Duration.appendChild(option_Duration);
+	    duration_Result.appendChild(select_Duration);
+	     
+    })
+
+
+//----------------------------------------------------------------------------------------------
+
+
+
+      var movies = [
+          {
+            name: "Lord of the Rigs",
+            duration: 240,
+            starring: [ 'Elijah Wood', 'Ian McKellen', 'Orlando Bloom']
+          },
+          {
+            name: "Star Wars: Episode I - The Phantom Menace",
+            duration: 136,
+            starring: [ 'Ewan McGregor','Liam Neeson', 'Natalie Portman']
+          },
+          {
+            name: "Fargo",
+            duration: 100,
+            starring: [ 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
+          },
+          {
+          name: "V for Vendetta",
+          duration: 150,
+          starring: [ 'Hugo Weaving', 'Natalie Portman', 'Rupert Graves']
+        }
+        ];
+
+
+    let Result_btn_duration = document.getElementById("Result_btn_duration");
+    let Result_btn_actor = document.getElementById("Result_btn_actor");
+    let result_Film = document.getElementById("result_Film");
+    Result_btn_actor.innerHTML = "Результат_1";
+    Result_btn_duration.innerHTML = "Результат_2";
+    let film_arr = [];
+    let durationArr = [];
+    let string = "";
+    let emptyArr = new Array();
+
+//---------------------------------------------------------------------------------------------------    
+    movies.forEach(function(elem,i){    		
+	    elem.starring.forEach(function(elem1){
+	    	select_Actor.addEventListener("change", function(elem2){
+	    			if (select_Actor.value==elem1){
+	    				console.log(elem.name );
+	    				emptyArr += [`${select_Actor.value} ***** ${elem.name} `] + "</br>";
+
+	    			}
+	    			
+			})
+
+    	})
+	    select_Duration.addEventListener("change", function(elem4){
+					if (select_Duration.value==elem.duration){
+	    				console.log(elem.name );	    			
+	    				durationArr += [`duration = ${select_Duration.value} sec ***** ${elem.name}`] + "</br>";
+	    				console.log(elem.duration );
+	    			}
+    	})
+    		
+    	Result_btn_actor.addEventListener("click", function(){
+    		result_Film.innerHTML = `${emptyArr}
+    		------------------------------------------------------ `;
+
+    	})
+
+    	Result_btn_duration.addEventListener("click", function(){
+			result_Film.innerHTML =`${durationArr}
+    		------------------------------------------------------ `; 
+		})
+		
+    })
+    
+   //-----------------------------------------------------------------------------------------
+	
+			
+
+  })
+
+    </script>
+</head>
+<body>
+	<div id = "result">
+		
+	</div>
+	<div id = "find">
+		
+	</div>
+	<div id = "findResult">
+		
+	</div>
+
+
+
+
+	<div id="wrap">
+		<div id="Select_Result">Актори: </div>
+		<button id="Result_btn_actor"></button>
+		<div id="duration_Result">Тривалість: </div>
+		<button id="Result_btn_duration"></button>
+	</div>
+	<div id ="result_Film">
+		
+	</div>
+</body>
+</html>

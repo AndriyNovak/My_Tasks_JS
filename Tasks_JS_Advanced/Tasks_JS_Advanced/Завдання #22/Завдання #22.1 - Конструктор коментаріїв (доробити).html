@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ITEA -Diploma_JS </title>
+  <link rel="stylesheet" href="css/normalize.css" />
+  
+  <style>
+     body{
+     	display: flex;
+     	justify-content: center;
+     	align-items: center;
+      /*font-family: Arial;*/
+      background-image: url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-720412.png);
+     }
+     .main_wrap{
+     	width: 70%;     	
+     	background-color: lightblue;
+     	display: flex;
+     	justify-content: center;
+     	align-items: start;
+     }
+     .left_wrap{
+     	/*background-color: #FFC0CB;*/
+     	 background-image: url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-720412.png);
+     	width: 40%;
+     	/*height: 40vw;*/
+     	margin: 20px 5px 20px 15px;
+     	padding: 25px;
+     	border: 3px solid #00CED1;
+     	border-radius: 40px;
+     }
+      .right_wrap{
+     	/*background-color: #FFC0CB;*/
+     	 background-image:  url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-720412.png ) ;
+     	width: 40%;
+     	/*height: 40vw;*/
+     	margin: 20px 15px 20px 5px;
+     	padding: 25px;
+     	border: 3px solid #00CED1;
+     	border-radius: 40px ;
+     }
+     .left_content{
+     	background-color: #98FB98;
+     	width: 100%
+     	min-height:400px;
+      padding: 15px;
+      margin-top: 10px;
+      border-radius: 20px 20px 20px 20px;
+      border: 2px solid gray;
+
+     }
+      #right_content{
+     	/*background-color: lightgray;*/
+     	width: 100%
+     	min-height:400px;
+      display: flex;
+      flex-direction: column;
+     	
+     }
+     h2{
+     	margin: 0px;
+     }
+     .author{
+     	background-color: lightgray;
+     	margin: 10px 0px 10px 0px;
+      width: 40%;
+     }
+     .text_constructor{
+     	background-color: lightgray;
+     	margin: 5px 0px 10px 0px;
+     }
+     .image_link{
+     	background-color: lightgray;
+     	width: 100%;
+     	margin: 0px 0px 10px 0px;
+     }
+     #send_btn{
+     	margin: 10px 0px 10px 0px;
+       cursor: pointer; 
+
+     }
+     .author_div{
+      color: blue;
+      font-size: 18px;
+        margin-top: 10px;
+     }
+     .date_div{
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 10px;
+     }
+     .areatext_div{
+      text-align: justify;
+      margin-bottom: 20px;
+     }
+     .Comment{
+      display: flex;
+      
+      
+     }
+     .likes{
+      color: red;
+      width: 25%;
+      padding: 3px 3px 3px 0;
+      display: flex;        
+      justify-content: flex-start;
+      cursor: pointer; 
+     }
+     
+     .show_comment{
+      width: 40%;
+      padding: 3px;
+      display: flex;        
+      justify-content: center;
+      cursor: pointer; 
+     }
+      .write_comment{
+      padding: 3px;
+      background-color: orange;
+      width: 38%;
+      display: flex;        
+      justify-content: center;
+      cursor: pointer; 
+     }
+     .likes_image{
+     /*background: lightgray;
+     background-image:  lightgray;
+     background-color: lightgray;*/
+      padding-right: 5px;
+     cursor: pointer; 
+     }
+    
+     .div_comment{
+      position: relative;
+      /*position: absolute;*/
+      /*margin:auto 0; */
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background-color: lightgray;
+      border: 1px solid gray;
+      border-radius: 20px;
+      margin-top: 10px;
+     }
+  </style>
+</head>
+<body>
+
+  
+  <div class ="main_wrap">
+  	<div class ="left_wrap">  		
+  		<header class="left_header">
+  			<h2>News feed</h2>
+  		</header>
+  	<!-- 	<section id="left_content">
+  			<div id="author_div"></div>
+        <div id="date_div"></div>
+        <div id="areatext_div"></div>
+        <img id="img_div"></img>
+        <section id="Comment">
+          <div id="likes"> <img  id="likes_image" src="img/Red-Heart.png" width="15px" height="15px">Likes: </div>
+          <div id="show_comment">Show Comments()</div>
+          <div id="write_comment">Write Comment</div>
+        </section>
+
+  		</section> -->
+     
+  	</div>
+  	<div class ="right_wrap">
+  		<header class="right_header">
+  			<h2>News Constructor</h2>
+  		</header>
+  		<section id="right_content">
+  			<input type="text" class="author" value="   Author">
+  			<textarea class="text_constructor" rows="7" cols="45">   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+  			<input type="text" class="image_link" value="    https://www.segodnya.ua/img/article/11328/26_ls.1524460064.jpg">
+
+  			<img id="preview_image" ></img>
+  			<button id="send_btn">Создать</button>
+  		</section>
+  	</div>
+  </div>
+
+  
+
+
+
+
+  <script type="text/javascript">
+
+  	let date =  new Date();  	
+  	let current_date = `${("0" + date.getDate()).slice(-2)}.${date.getMonth()+1}.${date.getFullYear()}`;
+  	
+  		let author = document.querySelector(".author");
+  		let text_constructor = document.querySelector(".text_constructor");  		
+  		let image_link = document.querySelector(".image_link");
+  		let send_btn = document.getElementById("send_btn");  	 		
+  		let preview_image = document.getElementById("preview_image");
+
+      let section_left_content ;        
+      let div_author_comment ;       
+      let date_div_comment;        
+      let areatext_div_comment ;        
+      let img_div_comment ; 
+      let section_Comment ;        
+      let likes_comment ;       
+      let likes_image_comment ;   
+      let show_comment ;        
+      let write_comment; 
+      let div_for_comment;
+
+      let main_wrap = document.querySelectorAll(".main_wrap");
+      let left_wrap = document.querySelector(".left_wrap");
+      console.log(left_wrap);
+
+ //---------------------------------------------------------------------------------------------------------- 	
+    	send_btn.addEventListener("click", function(){
+  			console.log(author.value); 
+  			console.log(current_date);
+        console.log(text_constructor.value);
+  			console.log(image_link.value);
+        
+        section_left_content = document.createElement("section");
+        section_left_content.classList.add("left_content");
+        author_div = document.createElement("div");
+        author_div.classList.add("author_div");
+        date_div = document.createElement("div");
+        date_div.classList.add("date_div");
+        areatext_div = document.createElement("div");
+        areatext_div.classList.add("areatext_div");
+        img_div = document.createElement("img");
+        img_div.classList.add("img_div");
+
+        section_left_content.appendChild(author_div);
+        section_left_content.appendChild(date_div);
+        section_left_content.appendChild(areatext_div);
+        section_left_content.appendChild(img_div);
+
+        section_Comment = document.createElement("section");
+        section_Comment.classList.add("Comment");
+
+
+
+
+        likes_comment = document.createElement("div");
+        likes_comment.classList.add("likes");       
+        likes_comment.innerHTML = `<div id="likes"> <img  class="likes_image"  src="img/Red-Heart.png" width="13px" height="13px">Likes: </div>`;
+        let count_likes=1;
+        likes_comment.addEventListener("click",function(){
+        	// localStorage.setItem("likes_storage",count_likes);
+        	// let likes_str = localStorage.getItem("likes_storage");
+        	likes_comment.innerHTML = `<div id="likes"> <img  class="likes_image"  src="img/Red-Heart.png" width="13px" height="13px" >Likes:${count_likes} </div>`;
+        	count_likes++;
+        	
+        })
+        
+        show_comment = document.createElement("div");
+        show_comment.classList.add("show_comment");
+        show_comment.innerHTML = "Show Comments()";
+
+        write_comment = document.createElement("div");
+        write_comment.classList.add("write_comment");
+        write_comment.innerHTML = "Write Comment";
+
+        section_Comment.appendChild(likes_comment);
+        section_Comment.appendChild(show_comment);
+        section_Comment.appendChild(write_comment);
+      
+        section_left_content.appendChild(section_Comment);        
+        left_wrap.appendChild(section_left_content);
+
+
+//-------------------------------------------------------------------------------------------
+  			author_div.innerHTML = author.value;
+  			date_div.innerHTML = current_date;
+        areatext_div.innerHTML =text_constructor.value;
+		    let img = document.createElement("img");
+        // img_div.appendChild(img);
+			  img_div.src = image_link.value;       
+        preview_image.src = image_link.value;
+        preview_image.setAttribute("width","100px");
+        preview_image.setAttribute("height","80px");
+        img_div.setAttribute("width","150px");
+        img_div.setAttribute("height","120px");
+        let div_hr = document.createElement("div");
+
+        div_hr.style.width = "100%";
+        div_hr.style.height = "1px";        
+        div_hr.style.background = "gray";
+        div_hr.style.margin = "0px 0 5px 0";
+
+        // left_wrap.appendChild(div_hr);
+
+
+
+
+
+
+        let count_comment =0;
+        write_comment.addEventListener("click",function(){
+
+             // write_comment.setAttribute("disabled",true);
+
+            let div_comment = document.createElement("div");
+            let inp_author = document.createElement("input");
+            let inp_text = document.createElement("textarea");
+            let btn_comment = document.createElement("button");
+            inp_author.value = "Comment author";
+            // inp_text.setAttribute("placeholder","Comment text");
+
+            inp_text.value = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            inp_text.setAttribute("rows","7");
+            inp_text.setAttribute("cols","45");
+            btn_comment.innerHTML = "Send Comment";
+            inp_author.style.marginBottom = "10px";
+            inp_author.style.width = "40%";
+            inp_text.style.marginBottom = "10px";
+            
+            div_comment.appendChild(inp_author);
+            div_comment.appendChild(inp_text);
+            div_comment.appendChild(btn_comment);
+            div_comment.classList.add("div_comment");
+            
+            btn_comment.addEventListener("click",function(){
+              div_for_comment = document.createElement("div");
+              
+              let data_comment = new Date();
+              let current_date_comment = `(${("0" + data_comment.getDate()).slice(-2)}.${data_comment.getMonth()+1}.${data_comment.getFullYear()} ${("0" + data_comment.getHours()).slice(-2)}:${("0" + data_comment.getMinutes()).slice(-2)})`;
+              console.log(current_date_comment);
+              let inp_author_div = document.createElement("div");
+              let data_coment_div = document.createElement("div");
+              let inp_text_div = document.createElement("div");
+
+              inp_author_div.innerHTML = inp_author.value;
+              data_coment_div.innerHTML = current_date_comment;
+              inp_text_div.innerHTML = inp_text.value;
+              inp_author_div.style.color = "blue";
+              inp_text_div.style.textAlign = "justify";
+              div_for_comment.appendChild(inp_author_div);
+              div_for_comment.appendChild(data_coment_div);
+              div_for_comment.appendChild(inp_text_div);
+              div_for_comment.classList.add("div_show_comment");
+              section_left_content.appendChild(div_for_comment);
+
+              div_comment.style.display = "none";
+              main_wrap.forEach(function(elem){
+                 elem.style.opacity = "1";
+
+              })
+               count_comment++;
+               show_comment.innerHTML = `Show Comments(${count_comment})`;
+          })
+
+
+        
+        // document.body.appendChild(div_comment);
+
+       left_wrap.appendChild(div_comment);
+      
+        // main_wrap.forEach(function(elem){
+        //   elem.style.opacity = "0.4";
+          
+        
+        // }) 
+        
+
+      })
+
+        let count = 0;
+        show_comment.addEventListener("click",function(){
+          let div_show_comment = document.querySelectorAll(".div_show_comment")
+          if (div_show_comment ){
+                
+              if (count==0){
+                div_show_comment.forEach(function(elem){
+                   console.log(elem);
+                   elem.style.display = "none";
+                })
+                 count++;
+              }
+              else if (count==1){
+                div_show_comment.forEach(function(elem){
+                   console.log(elem);
+                  elem.style.display = "block";
+                })
+                count=0;
+              }
+                
+              
+          }
+         
+              
+                   
+        })
+         
+
+
+
+  		})
+      
+
+
+
+  	
+  </script>
+</body>
+</html>

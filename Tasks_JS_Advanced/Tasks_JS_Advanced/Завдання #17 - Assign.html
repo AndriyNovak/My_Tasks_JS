@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Classwork</title>
+
+    <script>
+    /*
+      Задание:
+        1. Используя интерфейс который есть на страничке, написать визуальный
+        конструктор обектов используя значение key-value, которые вводятся в
+        соответствующие поля в форме.
+
+        2. Каждый созданый обьект выводить в тег code после добавления каждого
+        нового поля. Т.е мы должны визуально видить в каком состоянии наши обьекты
+        сейчас
+
+        3. По нажатию кнопки Combine Objects! два обьекта должны обьедениться
+        используя метод Object.assing или spread operator и вывестись на стринчку.
+
+        * Изменять HTML можно.
+
+    */
+
+
+    window.addEventListener("load", function(){
+      		let key1 = document.getElementById("key1");
+      		let value1 = document.getElementById("value1");
+      		let btn1 = document.getElementById("btn1");
+      		let code1 = document.getElementById("code1");
+
+      		let key2 = document.getElementById("key2");
+      		let value2 = document.getElementById("value2");
+      		let btn2 = document.getElementById("btn2");
+      		let code2 = document.getElementById("code2");
+      		let result = document.getElementById("result");
+      		
+      		
+      		let combineBTN = document.getElementById("combineBTN");
+
+      		let firstObj;
+      		let obj_1;
+      		let secondObj;
+      		let obj_2;
+	      
+      		btn1.addEventListener("click", function(e){
+      			e.preventDefault();
+      			let key_1 =key1.value;
+      			let value_1 = value1.value + "</br>";
+      			// let  result = "";
+	      		firstObj = {[key_1]: value_1 } ;
+	      		obj_1 = Object.assign({},firstObj,obj_1);
+	      		let a = JSON.stringify(obj_1);
+	      		code1.innerHTML = a ;
+
+      		})
+
+    		btn2.addEventListener("click", function(e){
+      			e.preventDefault();
+      			let key_2 =key2.value;
+      			let value_2 = value2.value + "</br>";
+	      		secondObj = {[key_2]: value_2 } ;
+	      		obj_2 = Object.assign({},obj_2,secondObj);
+	      		let b = JSON.stringify(obj_2);
+				code2.innerHTML = b ;
+
+      		})
+
+      		
+      		combineBTN.addEventListener("click", function(e){
+      			// e.preventDefault();
+      			let combineObj = Object.assign({},obj_1,obj_2);
+      			console.log(combineObj);
+      			let c = JSON.stringify(combineObj);
+				
+      			result.innerHTML = c;
+      		})
+      
+
+
+
+
+      	})
+      		
+      		
+
+
+
+    </script>
+</head>
+<body>
+  <div class="wrap">
+      <div class="assigned">
+        <form id="ObjForm1">
+            <input id="key1" name="key1" placeholder="Enter your key"/>
+            <input id ="value1" name="value1" placeholder="Enter your value"/>
+            <button id="btn1" type="submit1">Send</button>
+        </form>
+        <div class="createResult">
+          <header>
+            Created Object
+          </header>
+          <div class="createdObj">
+            <code id="code1">
+             {
+                id: 123,
+                b:'test',
+                demo:'test2'
+              }
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <div class="assigned">
+        <form id="ObjForm1">
+            <input id="key2" name="key2" placeholder="Enter your key"/>
+            <input id ="value2" name="value2" placeholder="Enter your value"/>
+            <button id="btn2" type="submit2">Send</button>
+          </form>
+          <div class="createResult">
+            <header>
+              Created Object
+            </header>
+            <div class="createdObj">
+              <code id="code2">
+                {
+                  id:123,
+                  b:'test',
+                  demo:'test2'
+                }
+              </code>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="resultBlock">
+       <button id="combineBTN">Combine Objects!</button>
+      <h3> Result: </h3>
+      <div id="result"></div>
+    </div>
+
+      <script>
+
+
+
+
+
+
+      </script>
+      <style>
+        .wrap{
+          width: 800px;
+          display: flex;
+        }
+        .ObjForm,
+        .resultBlock{
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          box-sizing: border-box;
+          padding: 10px 20px;
+        }
+
+        .assigned{
+          width: 400px;
+          display: flex;
+        }
+        .createResult header{
+          font-weight: 700;
+        }
+      </style>
+</body>
+</html>

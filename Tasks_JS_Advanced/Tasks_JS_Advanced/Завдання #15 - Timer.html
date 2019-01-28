@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+</head>
+<body>
+	<style type="text/css">
+		#result{
+			width: 100px;
+			height: 50px;
+			border:1px solid green;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		#result1{
+			width: 100px;
+			height: 50px;
+			border:1px solid blue;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	</style>
+      <!--
+        Создайте счетчик секунд, который начинает отчет с 1 и заканчивается на 30,
+        также добавьте кнопки который останавливают отчет, и запускают его заново и добавьте кнопку обнуляющую отчет.
+        Также попробуйте изменить код так чтобы отчет начиналься с 30 и заканчивалься на 1.
+
+       + бонус: Сделать так что бы на каждый тик (1с/2c) менялся цвет фона. Можно на основе генератора случайного цвета с предудущих уроков.
+       + бонус: Сделать визуализацию стрелки которая идет по кругу
+            document.getElementById("myDIV").style.transform = "rotate(7deg)";
+
+       + бонус: Сделать кнопки которые выбирают режим в котором идет отсчет - обычный от 0 до 30 или реверсивный от 30 до 0
+      -->
+
+      <button id="Start">Start</button>
+      <button id="Stop">Stop</button>
+      <button id="Reset">Reset</button>
+      <div id="result"></div>
+       <button id="Start1">Start1</button>
+      <button id="Stop1">Stop1</button>
+      <button id="Reset1">Reset1</button>
+      <div id="result1"></div>
+      <script>
+      	var Start = document.getElementById("Start");
+      	var Stop = document.getElementById("Stop");
+      	var Reset = document.getElementById("Reset");
+      	var result = document.getElementById("result");
+
+
+	    function getRandom(min, max) {
+	      min = Math.ceil(min);
+	      max = Math.floor(max);
+	      return Math.floor(Math.random() * (max - min + 1)) + min;
+	    }
+
+  
+  		var ff="#" +  getRandom(0,255).toString(16) + getRandom(0,255).toString(16) + getRandom(0,255).toString(16);
+
+  		
+
+
+
+		var count=0;
+		var appendCounter;
+		var	clearTimer;
+		function countFunk(){
+			count++;
+			result.innerHTML = count;
+			
+				// for(let i=count;i<31;i++){
+				// if (i%2===0){
+				// document.body.style.background = ff;					
+				// }
+				// }
+			if (count>=30){
+			clearInterval(clearTimer);	
+			}
+		};
+		
+
+
+		Start.addEventListener("click",function(){
+			clearInterval(clearTimer);
+			clearTimer = setInterval( countFunk,100);
+		})
+		Stop.addEventListener("click",function(){
+			clearInterval(clearTimer);	
+		}) 
+		Reset.addEventListener("click",function(){
+			count=0;
+			result.innerHTML = count;
+			clearInterval(clearTimer);		
+		})
+
+
+
+
+		// Обратный счетчик	
+
+		var Start1 = document.getElementById("Start1");
+      	var Stop1 = document.getElementById("Stop1");
+      	var Reset1 = document.getElementById("Reset1");
+      	var result1 = document.getElementById("result1");
+      	var counter_1=30;
+		var addCounter;
+		var	clearTimer_1;
+
+
+		function countFunk_1(){
+			counter_1--;
+			result1.innerHTML = counter_1;
+			if (counter_1<=1){
+			clearInterval(clearTimer_1);	
+			}
+		};
+		
+
+		Start1.addEventListener("click",function(){
+			clearInterval(clearTimer_1);
+			clearTimer_1 = setInterval( countFunk_1,100);
+		})
+		Stop1.addEventListener("click",function(){
+			clearInterval(clearTimer_1);	
+		}) 
+		Reset1.addEventListener("click",function(){
+			counter_1=30;
+			result1.innerHTML = counter_1;
+			clearInterval(clearTimer_1);		
+		}) 
+
+      </script>
+</body>
+</html>

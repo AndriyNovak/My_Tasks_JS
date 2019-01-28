@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ITEA-JS ADVANCED - LESSON 2: CLASSWORK 2</title>
+  <link rel="stylesheet" href="css/style.min.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="testBlock hover">
+      <button class="iButton" id="mouseHover">Наведи</button>
+      <ul id="hoverResult" class="resultBlock">
+       <!--  <li class="red">Hovered!</li>
+        <li class="blue">Hovered!</li>
+        <li class="orange">Hovered!</li>
+        <li class="orange">Hovered!</li>
+        <li class="purple">Hovered!</li> -->
+      </ul>
+    </div>
+
+    <div class="testBlock click">
+      <button class="iButton" id="mouseClick">Нажми левой кнопкой мышки</button>
+      <div id="clickResult" class=" resultBlock one two three four five six"></div>
+    </div>
+
+    <div class="testBlock context">
+      <button class="iButton" id="mouseContext">Вызови контекстное меню</button>
+      <div id="contextResult" class="resultBlock"></div>
+    </div>
+
+    <div class="testBlock keyboard">
+      <button class="iButton" id="keyboardButton">Нажми на клавиатуре</button>
+      <div id="keyboardResult" class="resultBlock"></div>
+    </div>
+
+  </div>
+
+  <script>
+   
+   
+    /*
+      Поработаем немного с ивентами:
+      onmouseenter
+      onclick
+      oncontextmenu
+      onkeydown
+
+      Задание:
+      На каждую из конопок назначить действие которое будет выполнять следующее действие:
+      1.На ховер(onmouseenter) повесить обработчик который будет при каждом наведении
+        на кнопку будет выводить в блок результатом елемент li с текстом "hovered!"
+        у которого будет один из следующих класов:
+        red blue green orange purple
+
+      2.На кнопку клика(onclick) повесить обработчик который будет удалять классы с
+        блока с результатом по очереди в таком порядке:
+
+        six > two > three > four > one > five
+
+        после того как блок окажется пустым, добавить их в порядке возрастания
+
+        one > two > three ... > six
+
+      3.На кнопку контекстного меню (oncontextmenu) повесить обработчик который в блок
+        для результата выведет блок со списком меню используя следующий шаблон:
+
+        <a href="http://google.com.ua">Google</a>
+        <a href="http://itea.ua/">ITEA</a>
+        <a href="https://www.youtube.com/">Youtube</a>
+
+        для запрета вызова контектстного меню, нужно в функцию обработчик передать событие
+        element.onevent = function(e){...}
+        и вызвать внутри этой функции из этой переменной
+        e.preventDefault(); <- Отмена действия по умолчанию
+
+        Повтороное кажатие на эту кнопку правой или левой кнопwкой мыши должно очистить блок.
+
+      4. На кнопку с обработчиком нажатия (onkeydown) повесить обработчик который будет
+        Выводить число нажатий на любую из клавиш клавиатуры
+
+
+    */
+    
+    mouseHover.onmouseenter = function(){
+      console.log('hover');
+      var hover = document.getElementById("mouseHover");
+      var ul = document.getElementById("hoverResult");
+      var li = document.createElement("li");
+      
+      li.innerHTML = "hovered!";
+      ul.appendChild(li);
+      var arr = ["red","blue","green","orange","purple" ];
+      var index =Math.round(Math.random()*4) ;
+      li.classList.add(arr[index]);
+      console.log(index);
+     
+
+    }
+
+       // 2.На кнопку клика(onclick) повесить обработчик который будет удалять классы с
+       //  блока с результатом по очереди в таком порядке:
+
+       //  six > two > three > four > one > five
+
+       //  после того как блок окажется пустым, добавить их в порядке возрастания
+
+       //  one > two > three ... > six 
+    var clickIndex = 0;
+    var direction = true;
+
+    mouseClick.onclick = function(){
+      console.log('click');
+      var arr1 = ["six",  "two",  "three",  "four",  "one",  "five"];
+      var arr2 = ["one",  "two",  "three",  "four",  "five",  "six"];
+      var clickResult = document.getElementById("clickResult");
+           
+            if (clickIndex<=5 && direction){
+              console.log("direction = true",clickIndex);
+              clickResult.classList.remove(arr1[clickIndex]);
+              clickIndex++;
+
+            	}
+            else if (clickIndex<=5 && direction==false){
+             	 	console.log("direction = false",clickIndex);
+              		clickResult.classList.add(arr2[clickIndex]);
+              		clickIndex++;
+              		
+            }
+            else {
+             	clickIndex=0;
+             	direction=false;
+			}
+          
+     
+    }
+
+
+// 3.На кнопку контекстного меню (oncontextmenu) повесить обработчик который в блок
+//         для результата выведет блок со списком меню используя следующий шаблон:
+
+//         <a href="http://google.com.ua">Google</a>
+//         <a href="http://itea.ua/">ITEA</a>
+//         <a href="https://www.youtube.com/">Youtube</a>
+
+//         для запрета вызова контектстного меню, нужно в функцию обработчик передать событие
+//         element.onevent = function(e){...}
+//         и вызвать внутри этой функции из этой переменной
+//         e.preventDefault(); <- Отмена действия по умолчанию
+
+//         Повтороное кажатие на эту кнопку правой или левой кнопwкой мыши должно очистить блок.
+    
+    var show =true;
+    
+    mouseContext.oncontextmenu = function(e){
+     
+      e.preventDefault();
+      var contextResult = document.getElementById("contextResult");
+      var a1 = document.createElement("a");
+      var a2 = document.createElement("a");
+      var a3 = document.createElement("a");      
+      var ul_1 = document.createElement("ul");
+      var li_1 = document.createElement("li");
+      var li_2 = document.createElement("li");
+      var li_3 = document.createElement("li");
+      var dd = document.createElement("div");
+            
+      ul_1.style.listStyleType = "none";
+      ul_1.style.padding = "0px";
+      ul_1.style.display = "flex";
+      ul_1.style.justifyContent = "center";
+      ul_1.style.flexDirection = "column"; 
+      a1.href = "http://google.com.ua";
+      a2.href = "http://itea.ua/";
+      a3.href = "https://www.youtube.com/";
+      a1.innerHTML = "Google";
+      a2.innerHTML = " ITEA";
+      a3.innerHTML = " Youtube";
+       
+      
+      li_1.appendChild(a1);      
+      li_2.appendChild(a2);      
+      li_3.appendChild(a3);
+      ul_1.appendChild(li_1);
+      ul_1.appendChild(li_2);
+      ul_1.appendChild(li_3);
+      
+  
+
+        if (show){      
+          contextResult.appendChild(ul_1);
+          show=false;
+        }
+        else {
+        contextResult.innerHTML = " ";
+      
+      }
+      
+      
+     
+    }
+  
+     
+
+    // 4. На кнопку с обработчиком нажатия (onkeydown) повесить обработчик который будет
+    //     Выводить число нажатий на любую из клавиш клавиатуры
+     	
+     	var count = 0;
+      
+        keyboardButton.onkeydown = function(){
+          console.log('keyboard');
+          var keyboardResult = document.getElementById("keyboardResult");
+          count++;
+          keyboardResult.innerHTML = count;
+      }
+      
+     
+
+    
+  </script>
+</body>
+</html>

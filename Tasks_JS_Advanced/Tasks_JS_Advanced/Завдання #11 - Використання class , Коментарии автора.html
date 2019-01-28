@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Constructors</title>
+</head>
+<style type="text/css">
+	.div_for_clear{
+		margin-top: 10px;
+		margin-left: 30px;
+		border: 1px solid green;		
+		width: 400px;
+		padding: 10px;
+
+	}
+	#message_list{
+		border: 1px solid blue;		
+		width: 500px;
+		padding: 10px;
+	}
+	.myDiv{
+		border:1px solid violet;
+	/*	padding-left: 0px;*/
+		padding: 5px;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+	.clear_ul li{
+		
+		list-style-type:none;
+	}
+	.btn_clear{
+		margin-left:20px;
+		
+	}
+</style>
+<body>
+
+
+
+  <div class="wrap">
+    <header>
+      <form>
+
+        <label for="author">
+          <span>Author</span>
+          <select id="author" name="author">
+            <option value="Taras Shevchenko">Taras Shevchenko</option>
+            <option value="Ivan Franko">Ivan Franko</option>
+            <option value="Vasyl Stys">Vasyl Stys</option>
+            <option value="Oles Gonchar">Oles Gonchar</option>
+          </select>
+        </label>
+
+        <label for="message">
+          <span>Message</span>
+          <textarea placeholder="Your Message" id="message"></textarea>
+        </label>
+
+        <button id= "submit" type="submit">Send Message</button>
+      </form>
+    </header>
+
+    <section>
+      <ul id="message_list">
+        <li id="li_mass">
+            <div class="message__date">
+              27/01/2018
+            </div>
+            <div class="message__author">
+              <b id="tag_b">Ivan Franko</b>
+            </div>
+            <div class="message__text">
+              Ночі безмірнії, ночі безсоннії...
+            </div>
+            <div class="message__controls">
+              <button class="_skipMessage">Skip</button>
+              <button class="_answerMessage">Answer</button>
+            </div>
+        </li>
+      </ul>
+
+    </section>
+
+
+
+  </div>
+
+
+  <script>
+  /*
+    Задание на классы.
+
+    Создать класс Message конструктор котрого состоит из следующих полей:
+    id, author, text, date, answers
+
+    У этого класса будет три метода:
+    SkipMessage() -> которое должно найти сообщение и удалить его из массива.
+    AnswerMessage()-> должно отрыть поле ввода, в который вы сможете ввести ответ
+    SendAnswer() -> метод который «отравляет» ответ, при этом обновляя поле ответа в вашем объекте с сообщением.
+
+    В метод SendAnswer нужно передать обьект класса Answer который наследуется от класса Message,
+    Но еще дополнительно будет иметь поле parentId.
+
+
+   obj { 
+    id :
+    date,
+    text,
+    autor,
+  ansvers:[ {
+    id :
+    date,
+    text,
+    autor,
+  }]
+    }
+
+    +Bonus: После создании сообщение добавляется в массив со всеми сообщениями, которые потом будут выводится на экран.
+
+    _ _ _
+
+    Задание можно разбелить на две части:
+      1. Создание самого сообщения:
+      id->выдаётся автоматом
+      Author-> селект с выбором автора
+      Text -> текст сообщения
+      date -> автоматически в момент создания
+
+      Все данные беруться с формы. Массив с сообщениями передается в функцию рендера, которая генерирует сам список.
+
+      2. Ответ на сообщение
+
+  */
+  	let author_Select = document.getElementById("author");
+  	let message__author = document.querySelector(".message__author");
+  	let tag_b = document.getElementById("tag_b");
+  	let message__text = document.querySelector(".message__text");
+  	let message__date = document.querySelector(".message__date");
+  	let submit = document.getElementById("submit");
+  	let message = document.getElementById("message");
+  	let message_list = document.getElementById("message_list");
+  	let _skipMessage = document.querySelector("._skipMessage");
+  	let _answerMessage = document.querySelector("._answerMessage");
+  	let li_mass = document.getElementById("li_mass");
+  	
+  	let div_for_clear = document.createElement("div");
+  	let ul_answer;
+
+//------------------------------------------------------------------------------------------------
+	
+  	class messageClases {
+  		constructor (id,author,text,date) {
+  			this.id = id;
+  			this.author = author;
+  			this.text = text;
+  			this.date = date;
+  			
+  		}
+		// SkipMessage(){} -> которое должно найти сообщение и удалить его из массива.
+		SkipMessage(){
+			message_list.style.display = "none";
+		}
+	    // AnswerMessage()-> должно отрыть поле ввода, в который вы сможете ввести ответ
+	    AnswerMessage(){
+	    	  ul_answer = document.createElement("ul");
+	    	 ul_answer.classList.add("clear_ul");
+	 		
+	    	let li_answer = document.createElement("li");
+	    	let textarea_answer = document.createElement("textarea");
+	    	textarea_answer.setAttribute("placeholder","Введите коментарий");
+	    	li_answer.appendChild(textarea_answer);
+
+	    	let btn_skip = document.createElement("button");	    	
+	    	let btn_add = document.createElement("button");
+
+	    	btn_add.innerHTML = "Add";
+	    	btn_skip.innerHTML = "Skip";
+	    	btn_skip.addEventListener("click",function(){
+	    		ul_answer.style.display = "none";
+	    	})
+	    	btn_add.addEventListener("click",function(){
+	    		li_answer.style.display = "none";
+	    		btn_skip.style.display = "none";
+	    		btn_add.style.display = "none";
+	    		
+	    		let myDiv = document.createElement("div");
+	    		myDiv.classList.add("myDiv");
+
+	    		let span = document.createElement("span");
+
+	    		span.innerHTML =  textarea_answer.value;
+	    		myDiv.appendChild(span);
+
+	    		let clearLi = document.createElement("button");
+	    		clearLi.innerHTML = "Clear";
+	    		myDiv.appendChild(clearLi);
+	    		clearLi.classList.add("btn_clear");
+	    		
+	    		clearLi.addEventListener("click",function(){
+	    			myDiv.innerHTML =  "";
+	    			myDiv.style.display ="none";
+	    		})
+	    		
+
+
+	    		ul_answer.appendChild(myDiv);
+	    	})
+
+	    	ul_answer.appendChild(li_answer);
+	    	ul_answer.appendChild(btn_skip);
+	    	ul_answer.appendChild(btn_add);
+	    	
+	    	
+	    	div_for_clear.appendChild(ul_answer);
+	    	div_for_clear.classList.add("div_for_clear");
+	    	li_mass.appendChild(div_for_clear);
+
+	    }
+	    // SendAnswer() -> метод который «отравляет» ответ, при этом обновляя поле ответа в вашем объекте с сообщением.
+	    SendAnswer(){
+		    
+	    	
+	    	message_list.style.display = "block";
+	    	console.log("Метод SendAnswer() визивається ");
+	  		tag_b.innerHTML = this.author.value;	
+	  		console.log(this.author.value);		  		
+  			message__date.innerHTML = this.date;
+	    	message__text.innerHTML = this.text.value;
+  			// console.log(this.id);
+  			this.text.value = "";
+	    }
+  	}
+  	
+ //------------------------------------------------------------------------------------------------
+ 	class Answers extends messageClases {
+	      		constructor(id,author,text,date){
+	      		  super(id,author,text,date);
+	      			
+	     		}
+	     		parentId(parentId){
+	     			
+	     			
+	     			console.log(parentId);
+	     		}
+	   		}
+ //------------------------------------------------------------------------------------------------
+let count=0;
+let id = 1;
+  	var date1 = new Date();
+  	let current_date = `${date1.getDate()}/${date1.getMonth()}/${date1.getFullYear()}`;
+	console.log(current_date);  
+		// let NewClass1 = new messageClases(1,author_Select,message,current_date,count);
+//------------------------------------------------------------------------------------------------
+	
+  	let NewClass = new Answers(id,author_Select,message,current_date);
+  	
+  	_skipMessage.addEventListener("click",function(){
+  		NewClass.SkipMessage();
+  	})
+  	
+  	_answerMessage.addEventListener("click",function(){  		
+		div_for_clear.style.display = "block";
+		NewClass.AnswerMessage();  		
+  	})
+//---------------------------------------------------------------------------------------------------
+
+  	submit.addEventListener("click", function(e){	    
+  			e.preventDefault();
+  			NewClass.parentId(count);
+  			count++;
+	    	NewClass.SendAnswer();
+			id++;
+
+	    	
+  			if (div_for_clear){
+  				div_for_clear.style.display = "none";
+  			}
+  			if (ul_answer){
+  				let clear_all_ul = document.querySelectorAll(".clear_ul");
+  				clear_all_ul.forEach(function(elem){
+  					elem.innerHTML = "";
+  				})
+	  				
+	  		}
+	  		
+	 })   	
+  			
+ //------------------------------------------------------------------------------------------------		
+  		
+  	
+  </script>
+</body>
+</html>

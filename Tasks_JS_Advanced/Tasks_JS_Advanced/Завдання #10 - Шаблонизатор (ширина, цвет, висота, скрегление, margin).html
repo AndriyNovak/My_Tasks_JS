@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Form work1</title>
+  <script>
+    /*
+      Задание:
+        Сделать шиблонизатор элемента по:
+        Ширине input type=range
+        Цвету  input type=color
+        Высоте input type=number
+        Скругление углов input type=number
+        Margin input type=number
+
+      Свойсвта: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference
+
+      Бонус:
+        + Сделать выборку цвета из рандомных 20 цветов которые выбираются из появившегося блока :
+        https://s3.envato.com/files/230412754/screenshots/1.png
+        За заготовку для рандома цвета использовать функцию из первых занятий.
+
+    */
+
+    window.addEventListener("load", function () {
+      var myWidth = document.getElementById('myWidth');
+      var myColor = document.getElementById("myColor");
+      var result = document.getElementById("result");
+      var myHeight = document.getElementById("myHeight");
+      var myBorderRadius = document.getElementById("myBorderRadius"); 
+      var myMargin = document.getElementById("myMargin");  
+      
+     var  circle;
+
+      function getRandom(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+      myColor.addEventListener('click', function(event1){        
+	      event1.preventDefault();
+         myColor.disabled=true; 
+	      console.log( event1.target.value );
+	      var mydiv = document.createElement("div");	      
+	      var h5 = document.createElement("h5");
+		    var wrap = document.createElement("div");
+	      
+	      wrap.classList.add("wrap");
+	      mydiv.classList.add("mydiv");
+	      h5.innerHTML = "Виберіть колір";
+	      
+	      mydiv.appendChild(h5);
+	      mydiv.appendChild(wrap);
+	      document.body.appendChild(mydiv);
+	      
+	      var arr = [];
+	      var arrFF = [];
+	      
+	      var count = 0;
+	      while(count<14){
+    			 circle = document.createElement("div");	
+    	     circle.classList.add("circle");
+    	    
+           var ff = "rgb(" +  getRandom(0,255) + "," + getRandom(0,255) + "," + getRandom(0,255) + ")";
+    	     circle.style.background = ff;
+            // console.log(ff);
+           
+    	     wrap.appendChild(circle); 
+           arrFF.push(ff);
+           arr.push(circle);
+	         count++;
+
+	      }
+        var circle_checked = wrap.querySelectorAll(".circle");
+        circle_checked.forEach(function(elArr){
+          elArr.addEventListener('click', function(){ 
+             result.style.background = elArr.style.background;
+             
+             mydiv.style.display = "none"; 
+             myColor.disabled=false; 
+          })
+        })
+        
+        });
+
+
+      
+      
+
+        // Ширине input type=range
+        myWidth.addEventListener('input', function(event){       
+        result.style.width = event.target.value + 'px';
+      });
+
+
+
+        // Цвету  input type=color       
+      // myColor.addEventListener('change', function(event2){
+      //   console.log( event2.target.value );    
+      //   result.style.background = event2.target.value;
+      // });
+    
+          // Высоте input type=number
+        myHeight.addEventListener('input', function(event3){       
+        result.style.height = event3.target.value + "px";
+      });
+
+        // Скругление углов input type=number
+        myBorderRadius.addEventListener('input', function(event4){ 
+        result.style.borderRadius = event4.target.value + "px";
+      });
+
+        // Margin input type=number
+        myMargin.addEventListener('input', function(event5){ 
+        result.style.margin = event5.target.value + "px";
+      });
+
+    });
+
+
+
+  </script>
+</head>
+<body>
+  <div class="Templating">
+    <form>
+      <input type="range" id="myWidth" min="10" max="500" step="10"/>
+      <input type="color" id="myColor" min="10" max="500" step="10"/>
+      <input type="number" id="myHeight" min="10" max="500" step="10"/>
+      <input type="number" id="myBorderRadius" min="10" max="500" step="10"/>
+      <input type="number" id="myMargin" min="10" max="500" step="10"/>
+    </form>
+
+    <div class="TemplatingResult">
+      <div id="result" class="result"></div>
+    </div>
+  </div>
+
+
+  <div id="colors">
+
+
+  </div>
+
+
+
+  <style>
+    #colors{
+      width: 200px;
+
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .result{
+      width: 50px;
+      background: gray;
+      box-sizing: border-box;
+      padding: 10px;
+    }
+    #MyValidateForm{
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #MyValidateForm input{
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+    .circle{
+      width: 30px;
+      height: 30px;
+      background: #ffff;
+      border-radius: 50%;
+     
+      margin: 6px;
+      
+    }
+    .circle:hover{
+      
+     border: 2px solid green;
+     width: 32px;
+     height: 32px;
+     
+     
+     margin: 3px;
+      
+    }
+    .mydiv {
+    	width: 300px;
+      	height: 140px;
+      	background-color: #ccffff;
+      	border:2px solid gray;
+      	margin: 30px 30px 30px 150px;
+      	border-radius: 20px;
+      	text-align: center;
+      	font-size: 30px;
+
+      
+    }
+    h5 {
+    	margin: 0px 0px 10px 0px;
+    	padding-top: 0px;
+    	border-radius: 20px 20px 0 0;
+    	/*overflow: hidden;*/
+    	background: linear-gradient( to top, #05faf2, #8cfa05);
+    }
+
+    .wrap{
+    	min-width: 250px;
+    	max-height: 130px;    	
+    	 overflow: hidden;
+    	  width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+
+    }
+  </style>
+</body>
+</html>

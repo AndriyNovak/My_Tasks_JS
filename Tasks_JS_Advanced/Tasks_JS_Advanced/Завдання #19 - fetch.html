@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ITEA-JS ADVANCED - LESSON 8</title>
+ 
+  <style>
+ 
+</style>
+<script type="text/javascript">
+/*
+  Задача:
+
+  1. При помощи fetch получить данные:
+     http://www.json-generator.com/api/json/get/cgwbLkTxnS?indent=2
+
+  2. Полученый ответ преобразовать в json вызвав метод .json с объекта ответа
+  3. Выбрать случайного человека и передать в следующий чейн промиса
+  4. Сделать дополнительный запрос на получение списка друзей человека
+     http://www.json-generator.com/api/json/get/bTBBXQabKG?indent=2
+     И дальше передать обьект:
+      {
+        name: userName,
+        ...
+        friends: friendsData
+      }
+
+     Подсказка нужно вызвать дополнительный fecth из текущего чейна.
+     Для того что бы передать результат выполнения доп. запроса
+     в наш первый промис используйте констуркцию:
+
+      .then(
+        response1 => {
+          return fetch(...)
+            .then(
+              response2 => {
+                ...
+                формируете обьект в котором будут данные человека с
+                первого запроса, например его name response1.name
+                и друзья которые пришли из доп. запроса
+              }
+            )
+        }
+      )
+
+  5. Вывести результат на страничку
+
+  + Бонус. Для конвертации обьекта response в json использовать одну
+    функцию.
+
+*/
+const ConvertToJSON = ( data ) => data.json();
+
+
+let url1 = "http://www.json-generator.com/api/json/get/cgwbLkTxnS?indent=2";
+let url2 = "http://www.json-generator.com/api/json/get/bTBBXQabKG?indent=2";
+let name_main;
+let arr = [];
+fetch(url1, {
+        method: 'POST'
+    })
+    .then( ConvertToJSON)
+    .then((persons) => {
+        let randomName = Math.floor(Math.random() * (persons.length));
+        name_main = persons[randomName].name;
+        return fetch(url2, {
+            method: 'POST'
+        });
+    })
+    .then(ConvertToJSON)
+    .then(friends => {
+        let obj = {
+            name: name_main,
+            friends: friends[0].friends
+        }
+        
+        console.log(friends[0].friends);
+        obj.friends.forEach(function(elem,i){
+        	arr.push(elem.name);
+        	console.log(elem)
+        })
+        document.body.innerHTML = `name: ${obj.name} </br>
+        friends: ${arr.join(", ")}`;
+       
+    })
+
+    
+   
+  
+
+   </script>
+  </head>
+  <body>
+  
+  </body>
+</html>

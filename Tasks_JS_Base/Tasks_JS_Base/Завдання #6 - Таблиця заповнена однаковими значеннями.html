@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>Функции в JavaScript</title>
+
+    <script type="text/javascript">
+
+        var string = +prompt("Введіть кількість рядків",2);
+        var colum = +prompt("Введіть кількість колонок",2);
+        var text = prompt("Введіть текст", "first");      
+        function table(string,colum,text) {    
+            
+            for (var i=0;i<colum;i++){
+            	document.write ("<tr>"); 
+            	for (var j=0;j<string;j++) {        
+            		// document.write ("<td>" + text + "</td>");   
+            		document.write ("<td >"); 
+            		document.write (text); 
+            		document.write ("</td>");   			
+            	}
+           		document.write ("</tr>") ;
+        	}
+        }
+
+        document.write ("<table border='1px'>")
+        table(string,colum,text);
+        document.write ("</table>");
+       
+        
+    </script>
+
+
+
+
+
+</head>
+<body>
+
+   
+
+</body>
+</html>

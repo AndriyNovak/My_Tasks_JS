@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Task 3</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap" id="wrap">
+      <h1>Переключение слайдера</h1>
+      <div class="roadMap__container yellow">
+        <button class="navButton" data-direction="<"> Prev </button>
+        <div class="roadMap">
+          <div class="roadMapPoint" data-id="1"></div>
+          <div class="roadMapPoint ball" data-id="2"></div>
+          <div class="roadMapPoint" data-id="3"></div>
+          <div class="roadMapPoint" data-id="4"></div>
+        </div>
+        <button class="navButton" data-direction=">"> Next </button>
+      </div>
+
+      <div class="roadMap__container red">
+        <button class="navButton" data-direction="<"> Prev </button>
+        <div class="roadMap">
+          <div class="roadMapPoint" data-id="1"></div>
+          <div class="roadMapPoint" data-id="2"></div>
+          <div class="roadMapPoint ball" data-id="3"></div>
+          <div class="roadMapPoint" data-id="4"></div>
+        </div>
+        <button class="navButton" data-direction=">"> Next </button>
+      </div>
+
+
+
+      <div class="roadMap__container blue">
+        <button class="navButton " data-direction="<"> Prev </button>
+        <div class="roadMap">
+          <div class="roadMapPoint" data-id="1"></div>
+          <div class="roadMapPoint ball" data-id="2"></div>
+          <div class="roadMapPoint " data-id="3"></div>
+          <div class="roadMapPoint" data-id="4"></div>
+        </div>
+        <button class="navButton" data-direction=">"> Next </button>
+      </div>
+
+    </div>
+    <script>
+
+      /*
+        Задание:
+
+        Написать скрипт, который будет приводить в действие переключалки из разметки.
+        И будет перемещать класс ball по точкам в зависимости от нажатой кнопки
+
+
+        просто добавляти клас до
+
+      */
+
+      var containers = document.querySelectorAll('.roadMap__container');
+      var navButton = document.querySelectorAll(".navButton");
+      var roadMap = document.querySelectorAll(".roadMap");		
+      
+
+
+      	containers.forEach( function( container ){
+      		  
+            	const roadMapPoints = container.querySelectorAll(".roadMapPoint"); 	
+              	const prevBtn = container.querySelector('.navButton[data-direction="<"]')
+              	const nextBtn = container.querySelector('.navButton[data-direction=">"]')
+
+              // var Btns = container.querySelectorAll('.navButton');
+              // 	Btns.forEach( function( btn ){
+              // 		if( btn.dataset.direction === ">"){
+              // 			console.log( btn );
+              // 		} else {
+              // 			console.log( btn );
+              // 		}
+              // 	})	
+
+              	prevBtn.addEventListener('click', function(){
+              		let ball = container.querySelector('.ball');
+
+              		let ballId = Number(ball.dataset.id);
+              			ballId--;
+
+              			if( ballId < 1){
+              				ballId = roadMapPoints.length;
+              			}
+
+              			roadMapPoints.forEach( function( point ){
+              				if( Number(point.dataset.id) === ballId){
+              					point.classList.add('ball');
+              				} else {
+              					point.classList.remove('ball');
+              				}
+              			})
+
+              		console.log( ball.dataset.id, ballId );	
+              	})
+
+
+              	nextBtn.addEventListener('click', function(){
+              		let ball = container.querySelector('.ball');
+
+              		let ballId = Number(ball.dataset.id);
+              			ballId++;
+
+              			if( ballId > roadMapPoints.length){
+              				ballId = 1;
+              			}
+
+              			roadMapPoints.forEach( function( point ){
+              				if( Number(point.dataset.id) === ballId){
+              					point.classList.add('ball');
+              				} else {
+              					point.classList.remove('ball');
+              				}
+              			})
+
+              		console.log( ball.dataset.id, ballId );	
+              	})
+               
+      	});
+
+
+
+
+     
+     	 
+
+
+    </script>
+  </body>
+
+
+</html>

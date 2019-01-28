@@ -1,0 +1,247 @@
+<html>
+<head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
+ <title></title>
+<!--  Алгоритм взаємодії з клієнтом наступний: 
+В налаштуваннях цієї програми необхідно вводити одну константу мінімальну заробітну плату, це десь на адміністративній частині сайту, що недоступна користувачу.
+Ось дещо структурований алгоритм взаємодії
+Оберіть характер стягнення:
+варіанти: 
+1. майнове                         2. немайнове
+1.1        Якщо майнове то: введіть суму боргу, яку необхідно стягнути,
+1.1.1     якщо 2% від суми боргу менше або дорівнює 10 мінімальним заробітним платам (37230,00 грн. станом на сьогодні) то розмір авансового внеску дорівнює 2% від суми, яку необхідно стягнути
+1.1.2     якщо 2% від суми боргу більше 10 мін. заробітних плат то сума авансового внеску дорівнює 10 мінімальним заробітним платам.
+ 
+2.1 Якщо немайнове, то питання: зазначте будь ласка стягувача із запропонованих варіантів 
+2.1.1     стягувачем є фізична особа (громадянин)  наслідок      розмір авансового внеску 1 мінімальна  заробітна плата програма розраховує
+2.1.2     Стягувачем є юридична особа (підприємство, установа, організація)  наслідок розмір авансового внеску 2 мінімальні заробітні плати  програма розраховує  -->
+ <style>
+  input{
+   padding-left:10px;
+  }
+  .form-width { 
+   max-width: 25rem;
+  }
+  .has-float-label {
+   position: relative;
+  }
+  .has-float-label label {
+   position: absolute;
+   left: 0;
+   top: 0;
+   cursor: text;
+   font-size: 75%;
+   opacity: 1;
+   -webkit-transition: all .2s;
+   transition: all .2s;
+   top: -.5em;
+   left: 0.75rem;
+   z-index: 3;
+   line-height: 1;
+   padding: 0 1px;
+  }
+  .has-float-label label::after {
+   content: " ";
+   display: block;
+   position: absolute;
+   background: white;
+   height: 2px;
+   top: 50%;
+   left: -.2em;
+   right: -.2em;
+   z-index: -1;
+  }
+  #tax:before{
+   content: 'Розрахунок';
+      position: absolute;
+      top: -2px;
+      line-height: 3px;
+      font-size: 0.8rem;
+      background: white;
+      color: red;
+  }
+  .has-float-label .form-control::-webkit-input-placeholder {
+   opacity: 1;
+   -webkit-transition: all .2s;
+   transition: all .2s;
+  }
+  .has-float-label .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
+   opacity: 0;
+  }
+  .has-float-label .form-control:placeholder-shown:not(:focus) + label {
+   font-size: 100%;
+   opacity: .5;
+   top: .3em;
+  }
+
+  .input-group .has-float-label {
+   display: table-cell;
+  }
+  .input-group .has-float-label .form-control {
+
+   border-radius: 0.25rem; 
+  }
+  .form-control {
+
+  border-radius: 0.25rem; 
+  }
+  #sum{
+   margin:0px;
+  }
+  .input-group .has-float-label:not(:last-child) .form-control {
+
+   border-bottom-right-radius: 0;
+   border-top-right-radius: 0;
+  }
+  .input-group .has-float-label:not(:first-child) .form-control {
+   border-bottom-left-radius: 0;
+   border-top-left-radius: 0;
+   margin-left: -1px;
+  }
+  .btn-primary{
+   background-color:#570C43;
+   border:none;
+  }
+  .btn-primary:hover{
+   background-color:#1a0609;
+  }
+  #fio,#adress,#ipn,#sum{
+   padding-left:10px;
+  }
+
+ </style>
+
+</head>
+<body>
+<div class="body">
+ <div class="p-x-1 p-y-3">
+  <div class="card card-block m-x-auto bg-faded form-width">
+   <legend class="m-b-1 text-xs-center">Розрахунок платежу</legend>
+   <div class="form-group input-group">
+    <span class="has-float-label">
+     <input class="form-control" id="fio" type="text" placeholder=" "/>
+     <label for="first">П.I.Б.</label>
+    </span>
+   </div>
+   <div class="form-group input-group">
+    <span class="has-float-label">
+     <input class="form-control" id="adress" type="text" placeholder=" "/>
+     <label for="adress">Адреса</label>
+    </span>
+   </div>
+   <div class="form-group has-float-label">
+    <input class="form-control" id="ipn" type="text" placeholder=" "/>
+    <label for="ipn">ІПН/Серія та номер паспорту/Код ЄДРПО</label>
+   </div>
+   <div class="form-group has-float-label">
+    <input class="form-control" id="date" type="date" placeholder=" " min='2015-01-01'/>
+    <label for="password">Дата</label>
+   </div>
+   <div><b>Оберіть характер стягнення:</b></div>
+   <div style="display: flex;justify-content: space-around;margin:15px 0px">
+    <div style="width: 48%;text-align: center;"><span>Майнове</span> <input id="own"  class="check" type="radio" value="own" name="own"> </div>
+
+    <div style="width: 48%;text-align: center;"><span>Не майнове</span> <input id = 'noOwn' class="check" type="radio" value="noOwn" name="own"></div></div>
+    <div class="form-group input-group">
+     <span class="has-float-label">
+      <input class="form-control" id="sum" type="text" placeholder=" "  style="width: 55%;min-height: 38px;" />
+      <label for="sum" id="sumLegend">Ціна позову</label>
+      <div class="form-control" id="tax" type="text" placeholder="" style="width: 35%;float: right;min-height: 38px;position: relative; " ></div>
+     </span>
+
+    </div>
+    <!-- <input id='sum' type="text" name="" > -->
+    <div id="person" style="display: none;  width: 100%;margin: auto;font-size: 0.9rem"><span style="text-align: justify;">Зазначте будь ласка стягувача із запропонованих варіантів:</span>
+     
+     <div
+style="margin: 10px 0px; ">
+     <input type="radio" name="person" id="body" style=""><span style="text-align: left"> Cтягувачем є фізична особа (громадянин)</span>
+     </div>
+     <div style="margin: 10px 0px; ">
+     <input type="radio" name="person" id="company" style=""><span style="text-align: left"> Стягувачем є юридична особа (підприємство, установа, організація)</span>
+    </div>
+    </div>
+    <div >До сплати:<span id="info" style="color: red;"></span></div>
+    <div class="text-xs-center">
+     <button class="btn btn-primary " style="width: 48%; font-size: 14px; padding: 5px 5px;margin-top: 10px;" type="">Cплатити онлайн</button>
+     <a  href = "http://executor.vip/bill/" class="btn  btn-primary" id ='bill'  style="width: 48%; font-size: 14px; padding: 5px 5px;margin-top: 10px;" type="">Сформувати квитанцію </a>
+    </div>
+   </div>
+</div>
+</div>
+
+
+
+<script type="text/javascript">
+    var minWage = 3723.0;
+    var own = document.getElementById("own");
+    var noOwn = document.getElementById("noOwn");
+    var radio = document.getElementsByClassName("check");
+    var sum = document.getElementById("sum");
+    var tax = document.getElementById("tax");
+    var person = document.getElementById("person");
+    var sumLegend = document.getElementById("sumLegend");
+    var body = document.getElementById("body");
+    var company = document.getElementById("company");
+    var info = document.getElementById("info");
+    sum.oninput = function (){
+     for(var i=0;i<radio.length;i++){
+      if (radio[i].checked==true && radio[i].value=="own"){
+        if (sum.value*0.02<=minWage*10){
+          tax.innerHTML = (sum.value*0.02).toFixed(2) + "грн";  //toFixed(2) округлення
+          var payment = (sum.value*0.02).toFixed(2) + "грн";
+          tax.innerHTML = payment;
+          info.innerHTML = payment;
+        }
+        else if (sum.value*0.02>minWage*10) {
+           tax.innerHTML = 10*minWage + "грн";  
+           var payment = 10*minWage + "грн";
+            tax.innerHTML = payment;
+            info.innerHTML = payment;
+        }
+      }
+      
+       }
+      }
+     
+      noOwn.onchange = function(){
+        person.style.display = "block";
+        tax.innerHTML = "";
+        sum.style.display = "none";
+        sumLegend.style.display = "none";
+        tax.style.width = "100%"; 
+        sum.value = "";
+        tax.innerHTML = "";
+        info.innerHTML = "";
+        
+      }
+      body.onchange = function (){
+        tax.innerHTML = minWage + " грн";
+        payment = minWage + " грн";
+        tax.innerHTML = payment;
+          info.innerHTML = payment;
+      }
+      company.onchange = function (){
+        tax.innerHTML = minWage*2 + " грн";
+        payment = minWage*2 + " грн";
+        tax.innerHTML = payment;
+          info.innerHTML = payment;
+      }
+      own.onchange = function () {
+        person.style.display = "none";
+        tax.innerHTML = "";
+        sum.style.display = "block";
+        sumLegend.style.display = "block";
+        tax.style.width = "35%";
+        tax.innerHTML = "";
+        info.innerHTML = "";
+       
+      }
+
+</script>
+
+
+
+
+</body>
+</html>

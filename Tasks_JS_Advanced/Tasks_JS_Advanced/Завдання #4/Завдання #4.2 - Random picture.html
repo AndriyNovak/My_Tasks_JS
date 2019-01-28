@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Task 2</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap" id="wrap">
+      <header>
+        <button id="HouseButton">House</button>
+        <button id="TreeButton">Tree</button>
+        <button id="PlaneButton">Plane</button>
+      </header>
+      <div id="chooseYourBlock">
+
+      </div>
+      <div id="result">
+
+      </div>
+    </div>
+    <script>
+     	var HouseButton = document.getElementById("HouseButton");
+     	var TreeButton = document.getElementById("TreeButton");
+     	var PlaneButton = document.getElementById("PlaneButton");
+     	var chooseYourBlock = document.getElementById("chooseYourBlock");
+     	var result = document.getElementById("result");
+     	var img = document.createElement("img");
+     	var btnHouse = document.createElement("button");
+     	var btnTree = document.createElement("button");
+     	var btnPlane = document.createElement("button");
+     	btnHouse.innerHTML = "RandomHouse";
+     	btnTree.innerHTML = "RandomTree";
+     	btnPlane.innerHTML = "RandomPlane";
+     	img.style.width = "150px";
+	    img.style.height = "150px";
+	   	var showImg = document.createElement("img");
+	    showImg.style.width = "150px";
+	    showImg.style.height = "150px";
+	    chooseYourBlock.style.display = "flex";
+	    chooseYourBlock.style.flexDirection = "column";
+	    btnHouse.style.width = "150px";
+	    btnTree.style.width = "150px";
+	    btnPlane.style.width = "150px";
+	    var houseArray = [
+        "https://static.pexels.com/photos/106399/pexels-photo-106399.jpeg",
+        "https://i.pinimg.com/736x/7f/be/50/7fbe50ec634c65709d7fe6ac267c4e6f--large-garage-plans-house-plans-large-family.jpg",
+        "https://i.ytimg.com/vi/Xx6t0gmQ_Tw/maxresdefault.jpg"
+      ];
+        var planeArray = [
+        "http://www.x-plane.com/wp-content/uploads/2014/08/B777-200ER.png",
+        "https://media.cntraveler.com/photos/57067c1e9adc6caf5afe3f4c/master/pass/plane-landing-cr-getty-sb10062851ai-001.jpg",
+        "https://media.wired.com/photos/59323264a31264584499367f/master/w_1024,c_limit/diesel-plane-inline.jpg"
+      ];
+      var treeArray = [
+        "https://static.pexels.com/photos/56875/tree-dawn-nature-bucovina-56875.jpeg",
+        "https://c1.staticflickr.com/8/7218/7184786016_1ddab461e8_b.jpg",
+        "http://www.atzmut.com/wp-content/uploads/2016/01/tree.jpg"
+      ];
+		// var random = Math.round(Math.random()*(3-1)-1);	
+	   
+     	function addImg_1() {
+	     	showImg.style.display = "none";
+	     	img.src = "https://image.flaticon.com/icons/svg/149/149064.svg";
+	     	chooseYourBlock.appendChild(img);
+	     	btnHouse.style.display = "block";	     		     	
+	     	chooseYourBlock.appendChild(btnHouse);
+	     	btnPlane.style.display = "none";
+	     	btnTree.style.display = "none";
+	     	btnHouse.addEventListener("click" ,function() {
+     			var random = Math.round(Math.random()*2);	
+     			
+     			showImg.src = houseArray[random];
+     			showImg.style.display = "block";	
+     			result.appendChild(showImg);
+     			
+	     	}) ;
+	    } 
+	    function addImg_2() {
+	     	showImg.style.display = "none";
+	     	img.src = "https://image.flaticon.com/icons/svg/620/620705.svg";
+	     	chooseYourBlock.appendChild(img);
+	     	btnTree.style.display = "block";	
+	     	chooseYourBlock.appendChild(btnTree);
+	     	btnHouse.style.display = "none";
+	     	btnPlane.style.display = "none";
+	     	btnTree.addEventListener("click" ,function() {
+     			 var random = Math.round(Math.random()*2);	  			
+     			
+     			showImg.src = treeArray[random];
+     			showImg.style.display = "block";	
+     			result.appendChild(showImg);
+     			
+     		
+     			
+     			
+	     	}) ;
+	    } 		
+	    function addImg_3() {
+	     	showImg.style.display = "none";
+	     	img.src = "https://image.flaticon.com/icons/svg/579/579268.svg";
+	     	chooseYourBlock.appendChild(img);
+	     	btnPlane.style.display = "block";	
+	     	chooseYourBlock.appendChild(btnPlane);
+	     	btnHouse.style.display = "none";
+	     	btnTree.style.display = "none";
+	     	btnPlane.addEventListener("click" ,function() {
+     			var random = Math.round(Math.random()*2);   			
+     			showImg.src = planeArray[random];
+     			
+     			showImg.style.display = "block";	
+     			result.appendChild(showImg);
+     			
+	     		
+     			
+	     	}) ;
+	    } 
+
+     	HouseButton.addEventListener("click" ,addImg_1) ;
+     	
+    	TreeButton.addEventListener("click" ,addImg_2);
+    	
+    	PlaneButton.addEventListener("click" ,addImg_3) ;
+    	
+    	
+	     	
+	     
+	    
+	     	
+	    
+      /*
+        Задание:
+
+        По нажатию на кнопку, в блок с id chooseYourBlock выводить иконку с нажатой кнопки:
+
+        House:  https://www.flaticon.com/free-icon/house_149064#term=house&page=1&position=8
+        Tree: https://www.flaticon.com/free-icon/christmas-tree_620705#term=Tree&page=1&position=2
+        Plane: https://www.flaticon.com/free-icon/airplane_579268#term=Plane&page=1&position=16
+
+        Под иконкой расположить еще одну кнопку, по нажатию на которую из соответствующего массива
+        подтягивается случайная картинка с изображением в блок result.
+        Предыдущий результат очищается.
+
+        var houseArray = [
+        "https://static.pexels.com/photos/106399/pexels-photo-106399.jpeg",
+        "https://i.pinimg.com/736x/7f/be/50/7fbe50ec634c65709d7fe6ac267c4e6f--large-garage-plans-house-plans-large-family.jpg",
+        "https://i.ytimg.com/vi/Xx6t0gmQ_Tw/maxresdefault.jpg"
+      ];
+        var planeArray = [
+        "http://www.x-plane.com/wp-content/uploads/2014/08/B777-200ER.png",
+        "https://media.cntraveler.com/photos/57067c1e9adc6caf5afe3f4c/master/pass/plane-landing-cr-getty-sb10062851ai-001.jpg",
+        "https://media.wired.com/photos/59323264a31264584499367f/master/w_1024,c_limit/diesel-plane-inline.jpg"
+      ];
+      var treeArray = [
+        "https://static.pexels.com/photos/56875/tree-dawn-nature-bucovina-56875.jpeg",
+        "https://c1.staticflickr.com/8/7218/7184786016_1ddab461e8_b.jpg",
+        "http://www.atzmut.com/wp-content/uploads/2016/01/tree.jpg"
+      ];
+
+      */
+    </script>
+  </body>
+
+
+</html>

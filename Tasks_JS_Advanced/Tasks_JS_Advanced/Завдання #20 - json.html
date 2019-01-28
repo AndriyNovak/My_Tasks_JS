@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ITEA-JS ADVANCED - LESSON 8</title>
+  <!-- <link rel="stylesheet" href="css/normalize.css" /> -->
+  <style>
+  body{
+    font-family: sans-serif;padding: 20px;
+  }
+  input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+</style>
+<script type="text/javascript">
+/*
+  Задание:
+  Написать скрипт который:
+    1. Собирает данные с формы (3 разных полей), конвертирует их в json и выводит в консоль.
+  ->  2. Сделать отдельный инпут который выполняет JSON.parse(); на ту строку что вы туда ввели и выводит результат в консоль.
+
+  Array.from(HTMLNodeColection); -> Arary
+
+
+
+  <form>
+    <input name="name" />
+    <input name="age"/>
+    <input name="password"/>
+
+    <button></button>
+  </form>
+
+
+    <input />
+
+  -> '{"name" : !"23123", "age": 15, "password": "*****" }'
+
+
+*/
+
+
+
+
+
+
+window.addEventListener('load', function(){
+    let getName = document.getElementById("name1");
+  let getAge = document.getElementById("age1");
+  let getJob = document.getElementById("job1");
+  let btn = document.getElementById("btn");
+  let formID = document.getElementById("formID");
+  var a1 = document.forms.formID.name1;
+  var a2 = document.forms.formID.age1;
+  var a3 = document.forms.formID.job1;
+  var myDiv = document.createElement("div");
+    document.forms.formID.name1.value = "Max";
+    document.forms.formID.age1.value = "23";
+    document.forms.formID.job1.value = "Fron-end Developer";
+     
+    btn.addEventListener("click", function(){
+      event.preventDefault();
+      var arr = ["nameJson: " + document.forms.formID.name1.value,"AgeJson: " + 
+      document.forms.formID.age1.value,
+       "JobJson: " + document.forms.formID.job1.value,  ];
+       
+      var stringifyJSON = JSON.stringify(arr);
+      console.log(stringifyJSON);
+      let mydiv1 = document.getElementById("mydiv1");
+      mydiv1.innerHTML = stringifyJSON;
+      document.forms.formID.name1.value = "";
+      document.forms.formID.age1.value = "";
+      document.forms.formID.job1.value = "";
+      })
+      let mydiv2 = document.getElementById("mydiv2");
+     
+      let parse_id = document.getElementById("parse_id");
+      parse_id.setAttribute("placeholder","Скопируйте строку выше");
+      btn_2.addEventListener("click",function(){
+         event.preventDefault();
+         let parseJSON = JSON.parse(parse_id.value);
+        console.log(parseJSON);
+        mydiv2.innerHTML = parseJSON;
+        parse_id.value = "";
+      });
+      
+
+          
+    })
+  
+
+   </script>
+  </head>
+  <body>
+  <form id="formID"> 
+    <input name="name1"  id="name1"  />
+     <input name="age1" id="age1" />
+      <input name="job1" id="job1"   />
+
+      <button id="btn">JSON.stringify</button>
+  </form>
+  <div id="mydiv1"></div>
+ <form id="formID_parse"> 
+    <input name="parse_input"  id="parse_id"  />
+     
+      <button id="btn_2">JSON.parse</button>
+  </form>
+<div id="mydiv2"></div>
+   
+    
+  </body>
+</html>

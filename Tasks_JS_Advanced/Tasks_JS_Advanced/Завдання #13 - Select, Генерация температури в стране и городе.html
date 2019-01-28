@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Form work1</title>
+  <script>
+    /*
+      Задание:
+
+      1. Сгенерировать список стран в Select countries
+      2. При выборе страны генерировать еще один Select со списком
+        городов этой страны и вывести этот селект в блок result
+      3. При выборе города нужно случайно рандомить температуру от
+      -10 градусов до +40. Если температура
+
+        -10 до 0 то 'Солнечно' 'Легкий снегопад' 'Сильный снегопад'
+        0 до 30 то  'Солнечно' 'Дождь' 'Ветер' 'Сильный дождь'
+        30 до 40 то 'Солнечно' 'Засуха' 'Ветер'
+
+      4. Вывести сообщение на страничку
+        {Country}. В {City} {Weather} {Temperature} градусов.
+        Ukraine. В Kyiv Солнечно -10 градусов
+
+        + бонус добавить красивые картинки с погодой
+    */
+    window.addEventListener("load", function () {
+      var countries = ['Ukraine', 'Poland', 'USA'];
+      var ukraineCity = ['Kyiv', 'Lviv', 'Odesa', 'Charkiv'];
+      var polandCity = ['Warszawa', 'Poznan', 'Krakow', 'Katowice'];
+      var usaCity = ['New York', 'Los Angeles', 'Las Vegas', 'Chicago'];
+      let countriesID = document.getElementById("countries");
+      let result = document.getElementById("result");
+    	
+
+    	
+		var select2= document.createElement("select");
+		var select3= document.createElement("select");
+		var select1 = document.createElement("select");
+		
+      countries.forEach(function(elem){
+      	var  option= new  Option( elem);    
+      	countriesID.appendChild(option);
+      	console.log(option.value);
+      
+      })	
+	  
+      
+      	var targetValue;
+    	var count=0;
+    	var ArrShow_country = [];
+      	var ArrShow_town = [];
+
+	countriesID.addEventListener("change",function(){
+	targetValue = countriesID.value;
+	console.log(targetValue);
+	
+		if (targetValue==="Ukraine" ){
+			select1.style.display = "block";
+			select2.style.display = "none";
+			select3.style.display = "none";
+			ArrShow_country.push(targetValue);	
+			ukraineCity.forEach(function(elem1){
+		      	if (select1.length<ukraineCity.length){
+					var option1= new  Option( elem1); 
+		      	select1.appendChild(option1);	      	
+		      		
+		      	result.appendChild(select1);
+		      	}
+		      	
+		      		
+		    })  	
+	      	
+		}	
+		else if (targetValue==="Poland"){
+			select2.style.display = "block";
+			select1.style.display = "none";
+			select3.style.display = "none";
+			ArrShow_country.push(targetValue);	
+			
+			polandCity.forEach(function(elem2){
+		      	if (select2.length<polandCity.length){
+		      	var option2= new  Option( elem2);  
+		      	select2.appendChild(option2);
+				
+		      		result.appendChild(select2);
+		      	}
+				})	
+		}
+		else if (targetValue==="USA"){
+			select3.style.display = "block";
+			select1.style.display = "none";
+			select2.style.display = "none";
+			ArrShow_country.push(targetValue);	
+			
+			usaCity.forEach(function(elem3){
+		      	if (select3.length<usaCity.length){
+		      	var option3= new  Option( elem3); 
+		      	select3.appendChild(option3);
+		      	
+		      	
+		      		result.appendChild(select3);
+		      	}
+			})
+		}
+
+	})
+	 	var targetTown;
+	 	if (select1){
+	 		select1.addEventListener("change",function(){
+			targetTown = select1.value;
+			console.log(targetTown);
+			ArrShow_town.push(targetTown);		
+	      	})
+	 	}
+	 	 if(select2){
+	 		select2.addEventListener("change",function(){
+			targetTown = select2.value;
+			console.log(targetTown);
+			ArrShow_town.push(targetTown);
+	      	})
+	 	}
+	 	 if(select3){
+	 		select3.addEventListener("change",function(){
+			targetTown = select3.value;
+			console.log(targetTown);
+			ArrShow_town.push(targetTown);	
+	      	})
+	 	}
+    	
+	function allRandomTemperature(){
+
+	}     
+   function getRandom(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
+    function Weather(Temperature){
+    // var Temperature =getRandom(-10, 40);
+    // console.log(Temperature);
+   
+    var arr1 = ['Солнечно', 'Легкий снегопад', 'Сильный снегопад']; 
+    var arr1_GG=getRandom(0,arr1.length-1);
+    var arr2 = ['Солнечно', 'Дождь' ,'Ветер' ,'Сильный дождь'];
+    var arr2_GG=getRandom(0,arr2.length-1);
+    var arr3 = ['Солнечно', 'Засуха', 'Ветер'];
+    var arr3_GG=getRandom(0,arr3.length-1);
+    	if (Temperature<=0 && Temperature>=-10){
+    		return arr1[arr1_GG]; 
+    			
+    	}
+    	else if (Temperature>=0 && Temperature<=30){
+    		return arr2[arr3_GG]; 
+    	}
+    	else if (Temperature>=30 && Temperature<=40){
+    		return arr3[arr3_GG]; 
+    	}
+    }
+    
+    var myDiv = document.createElement("div");
+    var a ;
+    var b;
+    countriesID.addEventListener("change",function(){
+    myDiv.innerHTML ="";
+    ArrShow_country.forEach(function(contry,i,arr_con){
+    	a=arr_con[i];
+    	Temperature =getRandom(-10, 40);
+    	Weather(Temperature);
+    })
+	})
+
+ if (select1){
+ 	myDiv.innerHTML ="";
+	 		select1.addEventListener("change",function(){
+			Temperature =getRandom(-10, 40);
+    		Weather(Temperature);
+			if (targetTown){
+		    	ArrShow_town.forEach(function(contry,j,arr_tow){
+		    	b=arr_tow[j];
+		    	
+	    		})	
+    		}
+    		myDiv.innerHTML = `${a}. В ${b} ${Weather(Temperature)} ${Temperature} градусов.`; 
+     		document.body.appendChild(myDiv);
+   
+	      	})
+}
+	 	 if(select2){
+	 	 	myDiv.innerHTML ="";
+	 		select2.addEventListener("change",function(){
+			Temperature =getRandom(-10, 40);
+    		Weather(Temperature);
+			if (targetTown){
+		    	ArrShow_town.forEach(function(contry,j,arr_tow){
+		    	b=arr_tow[j];    
+	    		})	
+    		}
+    		myDiv.innerHTML = `${a}. В ${b} ${Weather(Temperature)} ${Temperature} градусов.`; 
+     		document.body.appendChild(myDiv);
+   		})
+	      	
+}
+	 	 if(select3){
+	 	 	myDiv.innerHTML ="";
+	 		select3.addEventListener("change",function(){
+	 			Temperature =getRandom(-10, 40);
+    			Weather(Temperature);
+			if (targetTown){
+		    	ArrShow_town.forEach(function(contry,j,arr_tow){
+		    	b=arr_tow[j];    
+	    		})	
+    		}
+    		myDiv.innerHTML = `${a}. В ${b} ${Weather(Temperature)} ${Temperature} градусов.`; 
+     document.body.appendChild(myDiv);
+   })
+	      	
+	 	}
+
+
+    
+    	
+    
+
+
+    });
+  </script>
+</head>
+<body>
+  <select id="countries"></select>
+  <div id="result"></div>
+</body>
+</html>

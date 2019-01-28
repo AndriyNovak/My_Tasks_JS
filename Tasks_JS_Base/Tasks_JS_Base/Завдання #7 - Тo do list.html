@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<style type="text/css">   /* підключаемо бібліоткеку для галочки з сайту https://fontawesome.com/*/
+
+
+		body {
+			padding: 0px;
+			margin: 0px;
+		}
+		.header {
+			text-align: center;
+			height: 80px;
+			background: green;
+			padding: 20px;
+		}
+		#list {
+			list-style-type: none;
+			padding: 0px;
+			margin: 0px;
+		}
+		li {
+			padding: 10px;
+			font-size: 20px;
+			transition: 0.5s;
+		}
+		li:nth-child(odd) {   /* odd всі парні li */
+			background: indigo;
+		}
+		li:nth-child(even) {     /* even всі непарні li */
+			background: lightblue;
+		}
+		li:hover {
+			background: blue;
+		}
+		.closeElement {
+			position: absolute;
+			right: 20px;
+			cursor: pointer;
+		}
+		.chacked {
+			color:white;
+			text-decoration: line-through;
+			background: black !important;     /* !important перебвиває  стилі які були раніше  */
+		}
+		.chacked:before {
+			content: "\2714 ";
+		}
+	</style>
+
+</head>
+<body>
+
+ 	<div class="header">
+ 		
+ 		ToDo List <br><br>
+ 		<input type="text" name="" id = "input">
+ 		<button id="btn">Add the deal</button>
+ 	</div>
+ 	<ul id="list" >
+ 		<li>Some text</li>
+ 		<li  >Some text</li>
+ 		<li  >Some text</li>
+ 		<li  >Some text</li>
+ 		<li >Some text</li>
+ 	</ul>
+ 	
+
+	<script type="text/javascript">
+		
+		var ul = document.getElementById("list");
+		for (var i=0; i<ul.children.length;i++){
+			var span = document.createElement("span");
+			span.innerHTML = "x";
+			ul.children[i].appendChild(span);   //добавляє до і-ї li  span
+			span.classList = "closeElement";
+
+		}
+		var span2 = document.createElement("span"); 
+		for (var j=0; j<ul.children.length;j++) {
+			ul.children[j].onclick = function () {
+				this.classList.toggle("chacked");      //toggle створює класс chacked при кліку , при дургому кліку забирае клас
+				
+				// if (this.classList =="chacked") {
+				//   // span інша змінна локальна 
+				// span2.innerHTML = '<i class="fas fa-check"></i>' ;  // клас для галочки з сайту https://fontawesome.com/ 
+				// this.appendChild(span2);
+				// }
+				// else {
+				// 	span2.innerHTML = "";
+					
+				// 	span2.remove();
+
+				// }
+			}
+		}
+		var close = document.getElementsByClassName("closeElement");
+		
+		for (f=0;f<close.length;f++){
+				close[f].onclick = function() {
+					this.parentElement.remove(); // удаляє елемент з сторінки
+					this.psrentElement.style.display = "none"; // скриває елемент на сторінці
+			}
+		}
+		var input = document.getElementById("input");
+		var btn = document.getElementById("btn");
+		btn.onclick = function() {
+			var newLi = document.createElement("li");
+			newLi.innerHTML = input.value;
+			ul.appendChild(newLi);
+			input.value ="";  //стирає введене значення input
+			var span = document.createElement("span");
+			span.innerHTML = "x";
+			newLi.appendChild(span);   //добавляє до і-ї li  span
+			span.classList = "closeElement";
+			
+
+			for (var j=0; j<ul.children.length;j++) {
+			ul.children[j].onclick = function () {
+				this.classList.toggle("chacked");      //toggle створює класс chacked при кліку , при дургому кліку забирае клас				
+				// if (this.classList =="chacked") {
+				//   // span інша змінна локальна 
+				// span2.innerHTML = '<i class="fas fa-check"></i>' ;  // клас для галочки з сайту https://fontawesome.com/ 
+				// this.appendChild(span2);
+				// }
+				// else {
+				// 	span2.innerHTML = "";					
+				// 	span2.remove();
+				// }
+			}
+		}
+			var close = document.getElementsByClassName("closeElement");
+		
+			for (f=0;f<close.length;f++){
+				close[f].onclick = function() {
+					this.parentElement.remove(); // удаляє елемент з сторінки
+					this.psrentElement.style.display = "none"; // скриває елемент на сторінці
+			}
+		}
+	} 
+
+	</script>
+
+</body>
+</html>
